@@ -1,0 +1,5 @@
+export * from './cliente'
+export * from './contrato'
+export * from './gerente'
+export * from './representante'
+export * from './servico'

@@ -49,7 +49,19 @@
 					>
 				</li>
 				<li>
-					<a href="/" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Gerente</a>
+					<a href="/clientes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+						>Clientes</a
+					>
+				</li>
+				<li>
+					<a href="/representantes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+						>Representantes</a
+					>
+				</li>
+				<li>
+					<a href="/servicos" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+						>Serviços</a
+					>
 				</li>
 			</ul>
 		</div>

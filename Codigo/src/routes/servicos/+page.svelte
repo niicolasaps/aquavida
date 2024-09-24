@@ -157,6 +157,7 @@
 		<!-- <servicosModal /> -->
 
 		<form method="POST" action="?/update">
+			<input type="hidden" name="id" value={selectedServicos.id} />
 			<div class="flex flex-col gap-3 mt-3">
 				<label class="input input-bordered flex items-center gap-2">
 					<svg

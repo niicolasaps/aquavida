@@ -1,34 +1,32 @@
-import { db } from '../db';
+import { db } from '$lib/db';
 import { representanteTable } from '$lib/db/schema/representante';
-import type { InsertRepresentantes, SelectRepresentantes, SelectAllRepresentantes, UpdateRepresentante, DeleteRepresentante } from '$lib/db/schema/representante';
-
-// Funções do CRUD para 'representante'
+import type { InsertRepresentante, SelectRepresentante } from '$lib/db/schema/representante';
+import { eq } from 'drizzle-orm';
 
 async function insertRepresentante(data: InsertRepresentante) {
-    await db.insert(representanteTable).values(data).run();
+	return db.insert(representanteTable).values(data);
 }
 
-async function selectRepresentanteById(id: number): Promise<SelectRepresentanteById | undefined> {
-    return await db.select().from(representanteTable).where((representanteTable.id as any).eq(id)).get();
+async function selectRepresentanteById(id: number) {
+	return db.select().from(representanteTable).where(eq(representanteTable.id, id));
 }
 
-async function selectAllRepresentantes(): Promise<SelectAllRepresentantes[]> {
-    return await db.select().from(representanteTable).all();
+async function selectAllRepresentantes() {
+	return db.select().from(representanteTable);
 }
 
-async function updateRepresentante(id: number, data: Partial<UpdateRepresentante>) {
-    await db.update(representanteTable).set(data).where((representanteTable.id as any).eq(id)).run();
+async function updateRepresentante(id: number, data: Partial<SelectRepresentante>) {
+	return db.update(representanteTable).set(data).where(eq(representanteTable.id, id));
 }
 
 async function deleteRepresentante(id: number) {
-    await db.delete(representanteTable).where((representanteTable.id as any).eq(id)).run();
+	return db.delete(representanteTable).where(eq(representanteTable.id, id));
 }
 
-// Controlador exportado para 'representante'
 export const representanteController = {
-    insertRepresentante,
-    selectRepresentanteById,
-    selectAllRepresentantes,
-    updateRepresentante,
-    deleteRepresentante
+	insertRepresentante,
+	selectRepresentanteById,
+	selectAllRepresentantes,
+	updateRepresentante,
+	deleteRepresentante
 };

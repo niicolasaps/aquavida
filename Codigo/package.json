@@ -48,6 +48,7 @@
 	"dependencies": {
 		"@libsql/client": "^0.9.0",
 		"drizzle-orm": "^0.33.0",
-		"theme-change": "^2.5.0"
+		"theme-change": "^2.5.0",
+		"ti03-tratamento-agua": "file:"
 	}
 }

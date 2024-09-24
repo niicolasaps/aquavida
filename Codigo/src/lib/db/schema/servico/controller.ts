@@ -1,34 +1,31 @@
 import { db } from '$lib/db';
 import { servicoTable } from '$lib/db/schema/servico';
-import type { InsertServico, SelectServicoById, SelectAllServicos, UpdateServico, DeleteServico } from '$lib/db/schema/servico';
-
-// Funções do CRUD para 'servico'
+import type { InsertServico, SelectServico } from '$lib/db/schema/servico';
+import { eq } from 'drizzle-orm';
 
 async function insertServico(data: InsertServico) {
-    await db.insert(servicoTable).values(data).run();
+	return db.insert(servicoTable).values(data);
 }
 
-async function selectServicoById(id: number): Promise<SelectServicoById | undefined> {
-    return await db.select().from(servicoTable).where((servicoTable.id as any).eq(id)).get();
+async function selectServicoById(id: number) {
+	return db.select().from(servicoTable).where(eq(servicoTable.id, id));
 }
 
-async function selectAllServicos(): Promise<SelectAllServicos[]> {
-    return await db.select().from(servicoTable).all();
+async function selectAllServicos() {
+	return db.select().from(servicoTable);
 }
-
-async function updateServico(id: number, data: Partial<UpdateServico>) {
-    await db.update(servicoTable).set(data).where((servicoTable.id as any).eq(id)).run();
+async function updateServico(id: number, data: Partial<SelectServico>) {
+	return db.update(servicoTable).set(data).where(eq(servicoTable.id, id));
 }
 
 async function deleteServico(id: number) {
-    await db.delete(servicoTable).where((servicoTable.id as any).eq(id)).run();
+	return db.delete(servicoTable).where(eq(servicoTable.id, id));
 }
 
-// Controlador exportado para 'servico'
 export const servicoController = {
-    insertServico,
-    selectServicoById,
-    selectAllServicos,
-    updateServico,
-    deleteServico
+	insertServico,
+	selectServicoById,
+	selectAllServicos,
+	updateServico,
+	deleteServico
 };

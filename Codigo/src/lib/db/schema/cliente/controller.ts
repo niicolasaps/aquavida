@@ -1,36 +1,31 @@
 import { db } from '$lib/db';
 import { clienteTable } from '$lib/db/schema/cliente';
 import type { InsertCliente, SelectCliente } from '$lib/db/schema/cliente';
+import { eq } from 'drizzle-orm';
 
-// Inserir um cliente
 async function insertCliente(data: InsertCliente) {
-    return db.insert(clienteTable).values(data).run();
+	return db.insert(clienteTable).values(data);
 }
-
-// Selecionar um cliente por ID
 async function selectClienteById(id: number) {
-    return db.select().from(clienteTable).where((clienteTable.id as any).eq(id)).get();
+	return db.select().from(clienteTable).where(eq(clienteTable.id, id));
 }
 
-// Selecionar todos os clientes
 async function selectAllClientes() {
-    return db.select().from(clienteTable).all();
+	return db.select().from(clienteTable);
 }
 
-// Atualizar um cliente por ID
-async function updateCliente(id: number, data: Partial<InsertCliente>) {
-    return db.update(clienteTable).set(data).where((clienteTable.id as any).eq(id)).run();
+async function updateCliente(id: number, data: Partial<SelectCliente>) {
+	return db.update(clienteTable).set(data).where(eq(clienteTable.id, id));
 }
 
-// Deletar um cliente por ID
 async function deleteCliente(id: number) {
-    return db.delete(clienteTable).where((clienteTable.id as any).eq(id)).run();
+	return db.delete(clienteTable).where(eq(clienteTable.id, id));
 }
 
 export const clienteController = {
-    insertCliente,
-    selectClienteById,
-    selectAllClientes,
-    updateCliente,
-    deleteCliente
+	insertCliente,
+	selectClienteById,
+	selectAllClientes,
+	updateCliente,
+	deleteCliente
 };

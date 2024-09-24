@@ -1,32 +1,27 @@
 import { db } from '$lib/db';
 import { contratoTable } from '$lib/db/schema/contrato';
-import type { InsertContrato, SelectContratoById, SelectAllContratos, UpdateContrato, DeleteContrato } from '$lib/db/schema/contrato';
+import type { InsertContrato, SelectContrato } from '$lib/db/schema/contrato';
+import { eq } from 'drizzle-orm';
 
-// Inserir um contrato
 async function insertContrato(data: InsertContrato) {
-    return db.insert(contratoTable).values(data).run();
+	return db.insert(contratoTable).values(data);
 }
 
-// Selecionar um contrato por ID
 async function selectContratoById(id: number) {
-    return db.select().from(contratoTable).where((contratoTable.id as any).eq(id)).get();
+	return db.select().from(contratoTable).where(eq(contratoTable.id, id));
 }
 
-// Selecionar todos os contratos
 async function selectAllContratos() {
-    return db.select().from(contratoTable).all();
+	return db.select().from(contratoTable);
 }
 
-// Atualizar um contrato por ID
-async function updateContrato(id: number, data: Partial<InsertContrato>) {
-    return db.update(contratoTable).set(data).where((contratoTable.id as any).eq(id)).run();
+async function updateContrato(id: number, data: Partial<SelectContrato>) {
+	return db.update(contratoTable).set(data).where(eq(contratoTable.id, id));
 }
 
-// Deletar um contrato por ID
 async function deleteContrato(id: number) {
-    return db.delete(contratoTable).where((contratoTable.id as any).eq(id)).run();
+	return db.delete(contratoTable).where(eq(contratoTable.id, id));
 }
-
 export const contratoController = {
     insertContrato,
     selectContratoById,

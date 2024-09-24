@@ -1,26 +1,15 @@
-import { relations, sql } from 'drizzle-orm';
-import { representanteTable } from '../representante';
+import { relations } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 
-
 export const gerenteTable = sqliteTable('gerente', {
-    id: integer('id').primaryKey({ autoIncrement: true }),
-    Nome: text('Nome').notNull(),
-    Estado: text('Estado'),
+	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+	name: text('name').notNull(),
+    estado: text('estado').notNull(),
 });
 
-// Relações
 export const gerenteRelations = relations(gerenteTable, ({ many }) => ({
-    representantes: many(representanteTable),
+	representante: many(gerenteTable)
 }));
 
-export type InsertGerente = {
-    Nome: string;
-    Estado?: string;
-};
-
-export type SelectGerenteById = {
-    id: number;
-    Nome: string;
-    Estado?: string;
-};
+export type SelectGerente = typeof gerenteTable.$inferSelect;
+export type InsertGerente = typeof gerenteTable.$inferInsert;

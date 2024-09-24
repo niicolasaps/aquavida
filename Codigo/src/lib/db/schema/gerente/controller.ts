@@ -1,36 +1,32 @@
 import { db } from '$lib/db';
 import { gerenteTable } from '$lib/db/schema/gerente';
-import type { InsertGerente, SelectGerenteById, SelectAllGerentes, UpdateGerente, DeleteGerente } from '$lib/db/schema/gerente';
+import type { InsertGerente, SelectGerente } from '$lib/db/schema/gerente';
+import { eq } from 'drizzle-orm';
 
-// Inserir um gerente
 async function insertGerente(data: InsertGerente) {
-    return db.insert(gerenteTable).values(data).run();
+	return db.insert(gerenteTable).values(data);
 }
 
-// Selecionar um gerente por ID
 async function selectGerenteById(id: number) {
-    return db.select().from(gerenteTable).where((gerenteTable.id as any).eq(id)).get();
+	return db.select().from(gerenteTable).where(eq(gerenteTable.id, id));
 }
 
-// Selecionar todos os gerentes
 async function selectAllGerentes() {
-    return db.select().from(gerenteTable).all();
+	return db.select().from(gerenteTable);
 }
 
-// Atualizar um gerente por ID
-async function updateGerente(id: number, data: Partial<InsertGerente>) {
-    return db.update(gerenteTable).set(data).where((gerenteTable.id as any).eq(id)).run();
+async function updateGerente(id: number, data: Partial<SelectGerente>) {
+	return db.update(gerenteTable).set(data).where(eq(gerenteTable.id, id));
 }
 
-// Deletar um gerente por ID
 async function deleteGerente(id: number) {
-    return db.delete(gerenteTable).where((gerenteTable.id as any).eq(id)).run();
+	return db.delete(gerenteTable).where(eq(gerenteTable.id, id));
 }
 
 export const gerenteController = {
-    insertGerente,
-    selectGerenteById,
-    selectAllGerentes,
-    updateGerente,
-    deleteGerente
+	insertGerente,
+	selectGerenteById,
+	selectAllGerentes,
+	updateGerente,
+	deleteGerente
 };

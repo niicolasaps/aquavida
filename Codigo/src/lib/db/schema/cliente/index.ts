@@ -5,10 +5,10 @@ import { contratoTable } from '../contrato';
 
 export const clienteTable = sqliteTable('cliente', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-	cnpj: integer('cnpj').notNull(),
+	cnpj: text('cnpj').notNull(),
 	name: text('name').notNull(),
+	endereco: text('endereco'),
 	representante_id: integer('representante_id').references(() => representanteTable.id),
-	endereco: text('endereco')
 });
 
 export const clienteRelations = relations(clienteTable, ({ one }) => ({

@@ -1,6 +1,8 @@
 import { relations } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { gerenteTable } from '../gerente';
+import { clienteTable } from '../cliente';
+import { contratoTable } from '../contrato';
 
 export const representanteTable = sqliteTable('representante', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
@@ -9,8 +11,8 @@ export const representanteTable = sqliteTable('representante', {
 });
 
 export const representanteRelations = relations(representanteTable, ({ one, many }) => ({
-	cliente: many(representanteTable),
-	contratoTable: many(representanteTable),
+	cliente: many(clienteTable),
+	contratoTable: many(contratoTable),
 	gerente: one(gerenteTable, {
 		fields: [representanteTable.gerente_id],
 		references: [gerenteTable.id],

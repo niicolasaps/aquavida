@@ -3,7 +3,7 @@
 </script>
 
 <div class="dropdown dropdown-end dropdown-bottom">
-	<div title="Themes" role="button" tabindex="0" class="btn btn-primary">
+	<div title="Themes" role="button" tabindex="0" class="btn bg-base-300">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="24"

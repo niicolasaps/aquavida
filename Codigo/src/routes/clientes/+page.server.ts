@@ -11,9 +11,8 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const name = String(data.get('name'));
 		const cnpj = String(data.get('cnpj'));
-		const email = String(data.get('email'))
 
-		await clienteController.insertCliente({ name, cnpj,email });
+		await clienteController.insertCliente({ name, cnpj });
 	},
 	delete: async ({ request }) => {
 		const data = await request.formData();
@@ -26,8 +25,7 @@ export const actions: Actions = {
 		const id = Number(data.get('id'));
 		const name = String(data.get('name'));
 		const cnpj = String(data.get('cnpj'));
-		const email = String(data.get('email'))
 
-		await clienteController.updateCliente(id, { name, cnpj,email });
+		await clienteController.updateCliente(id, { name, cnpj });
 	}
 };

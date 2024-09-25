@@ -7,7 +7,6 @@ export const clienteTable = sqliteTable('cliente', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
 	cnpj: text('cnpj').notNull(),
 	name: text('name').notNull(),
-	email: text('email').notNull(),
 	endereco: text('endereco'),
 	representante_id: integer('representante_id').references(() => representanteTable.id),
 });

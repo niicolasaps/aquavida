@@ -1,8 +1,10 @@
 import { clienteController, representanteController } from '$lib/db/controllers';
 import type { PageServerLoad, Actions } from './$types';
 
-export const load = (async () => {const representantes = representanteController.selectAllRepresentantes();
-	return { representantes };
+export const load = (async () => {
+	const representantes = await representanteController.selectAllRepresentantes();
+	const clientes = await clienteController.selectAllClientes()
+	return { representantes,clientes };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

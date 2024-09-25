@@ -9,6 +9,7 @@
 	let representantes = data.representantes;
 	let isOpenModal: HTMLDialogElement | null = null;
 	let isOpenModalUpdate: HTMLDialogElement | null = null;
+	let clientes = data.clientes
 
 	let selectedRepresentante: SelectRepresentante = {
 		id: 1,
@@ -57,11 +58,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!-- {#each representantes as representante}
+				{#each representantes as representante}
 					<tr>
 						<td>{representante.id}</td>
 						<td>{representante.name}</td>
-						<td>{representante.representante_id ?? 'Sem representante vinculado'}</td>
 						<td>
 							<button class="btn btn-primary" on:click={() => openEditModal(representante)}
 								><svg
@@ -110,7 +110,7 @@
 							</form>
 						</td>
 					</tr>
-				{/each} -->
+				{/each}
 			</tbody>
 		</table>
 	</div>

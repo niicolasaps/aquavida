@@ -9,13 +9,14 @@
 	let clientes = data.clientes;
 	let isOpenModal: HTMLDialogElement | null = null;
 	let isOpenModalUpdate: HTMLDialogElement | null = null;
+	let representantes = data.representantes;
 
 	let selectedCliente: SelectCliente = {
 		id: 1,
 		name: '',
 		cnpj: '',
 		endereco: '',
-		email:'',
+		email: '',
 		representante_id: 1
 	};
 
@@ -57,6 +58,7 @@
 					<th>Nome</th>
 					<th>CNPJ</th>
 					<th>Email</th>
+					<th>Endereco</th>
 					<th>Representante</th>
 					<th>Update</th>
 					<th>Delete</th>
@@ -69,10 +71,10 @@
 						<td>{cliente.name}</td>
 						<td>{cliente.cnpj}</td>
 						<td>{cliente.email}</td>
+						<td>{cliente.endereco}</td>
 						<td>{cliente.representante_id ?? 'Sem representante vinculado'}</td>
 						<td>
-							<button class="btn btn-primary" on:click={() => openEditModal(cliente)}
-								>
+							<button class="btn btn-primary" on:click={() => openEditModal(cliente)}>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
@@ -164,6 +166,21 @@
 					</svg>
 					<input type="email" class="grow" placeholder="Email" name="email" />
 				</label>
+				<label class="input input-bordered flex items-center gap-2">
+					<input
+						type="text"
+						class="grow"
+						placeholder="Endereco"
+						name="endereco"
+						value={selectedCliente.endereco}
+					/>
+				</label>
+				<select class="select select-bordered w-full" name="representante_id">
+					<option disabled selected>Selecione o representante</option>
+					{#each representantes as representate}
+						<option value={representate.id}>{representate.name}</option>
+					{/each}
+				</select>
 				<button class="btn btn-info" type="submit">Criar cliente</button>
 			</div>
 		</form>
@@ -226,7 +243,22 @@
 							d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
 						/>
 					</svg>
-					<input type="email" class="grow" placeholder="Email" name="email" value={selectedCliente.email}/>
+					<input
+						type="email"
+						class="grow"
+						placeholder="Email"
+						name="email"
+						value={selectedCliente.email}
+					/>
+				</label>
+				<label class="input input-bordered flex items-center gap-2">
+					<input
+						type="text"
+						class="grow"
+						placeholder="Endereco"
+						name="endereco"
+						value={selectedCliente.endereco}
+					/>
 				</label>
 				<button class="btn btn-info" type="submit">Atualizar cliente</button>
 			</div>

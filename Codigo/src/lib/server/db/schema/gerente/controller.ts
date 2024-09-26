@@ -1,6 +1,6 @@
-import { db } from '$lib/db';
-import { gerenteTable } from '$lib/db/schema/gerente';
-import type { InsertGerente, SelectGerente } from '$lib/db/schema/gerente';
+import { db } from '$lib/server/db';
+import { gerenteTable } from '$lib/server/db/schema/gerente';
+import type { InsertGerente, SelectGerente } from '$lib/server/db/schema/gerente';
 import { eq } from 'drizzle-orm';
 
 async function insertGerente(data: InsertGerente) {

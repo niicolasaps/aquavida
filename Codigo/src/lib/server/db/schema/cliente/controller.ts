@@ -1,6 +1,6 @@
-import { db } from '$lib/db';
-import { clienteTable } from '$lib/db/schema/cliente';
-import type { InsertCliente, SelectCliente } from '$lib/db/schema/cliente';
+import { db } from '$lib/server/db';
+import { clienteTable } from '$lib/server/db/schema/cliente';
+import type { InsertCliente, SelectCliente } from '$lib/server/db/schema/cliente';
 import { eq } from 'drizzle-orm';
 
 async function insertCliente(data: InsertCliente) {

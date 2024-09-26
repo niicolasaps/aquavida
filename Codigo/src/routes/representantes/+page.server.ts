@@ -1,4 +1,4 @@
-import { clienteController, representanteController } from '$lib/db/controllers';
+import { clienteController, representanteController } from '$lib/server/db/controllers';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async () => {

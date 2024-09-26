@@ -1,6 +1,6 @@
-import { db } from '$lib/db';
-import { contratoTable } from '$lib/db/schema/contrato';
-import type { InsertContrato, SelectContrato } from '$lib/db/schema/contrato';
+import { db } from '$lib/server/db';
+import { contratoTable } from '$lib/server/db/schema/contrato';
+import type { InsertContrato, SelectContrato } from '$lib/server/db/schema/contrato';
 import { eq } from 'drizzle-orm';
 
 async function insertContrato(data: InsertContrato) {

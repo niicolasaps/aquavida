@@ -1,6 +1,6 @@
-import { db } from '$lib/db';
-import { servicoTable } from '$lib/db/schema/servico';
-import type { InsertServico, SelectServico } from '$lib/db/schema/servico';
+import { db } from '$lib/server/db';
+import { servicoTable } from '$lib/server/db/schema/servico';
+import type { InsertServico, SelectServico } from '$lib/server/db/schema/servico';
 import { eq } from 'drizzle-orm';
 
 async function insertServico(data: InsertServico) {

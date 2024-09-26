@@ -1,6 +1,6 @@
-import { db } from '$lib/db';
-import { representanteTable } from '$lib/db/schema/representante';
-import type { InsertRepresentante, SelectRepresentante } from '$lib/db/schema/representante';
+import { db } from '$lib/server/db';
+import { representanteTable } from '$lib/server/db/schema/representante';
+import type { InsertRepresentante, SelectRepresentante } from '$lib/server/db/schema/representante';
 import { eq } from 'drizzle-orm';
 
 async function insertRepresentante(data: InsertRepresentante) {

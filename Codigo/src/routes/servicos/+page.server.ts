@@ -1,4 +1,4 @@
-import {servicoController } from '$lib/db/controllers';
+import {servicoController } from '$lib/server/db/controllers';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async () => {

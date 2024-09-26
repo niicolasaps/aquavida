@@ -10,13 +10,13 @@
 			<form method="post" use:enhance>
 				<div class="w-full mt-4">
 					<label class="input input-bordered flex items-center gap-2">
-						<input type="text" class="grow" placeholder="Email" />
+						<input type="text" class="grow" placeholder="Email" name="email" />
 					</label>
 				</div>
 
 				<div class="w-full mt-4">
 					<label class="input input-bordered flex items-center gap-2">
-						<input type="password" class="grow" />
+						<input type="password" class="grow" name="password" />
 					</label>
 				</div>
 

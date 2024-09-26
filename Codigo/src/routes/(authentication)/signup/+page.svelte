@@ -68,6 +68,7 @@
 			{#if isRepresentante}
 				<h3 class="mt-3 text-xl font-medium text-center text-opacity-60">Criar sua conta!</h3>
 				<form method="post" use:enhance>
+					<input type="hidden" name="isCliente" value={isCliente} />
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
 							<svg
@@ -80,18 +81,18 @@
 									d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"
 								/>
 							</svg>
-							<input type="text" class="grow" placeholder="Username" />
+							<input type="text" class="grow" placeholder="Username" name="username" />
 						</label>
 					</div>
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="Email" />
+							<input type="text" class="grow" placeholder="Email" name="email" />
 						</label>
 					</div>
 
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="password" class="grow" />
+							<input type="password" class="grow" name="password" />
 						</label>
 					</div>
 
@@ -102,19 +103,20 @@
 					Criar sua conta de Cliente!
 				</h3>
 				<form method="post" use:enhance>
+					<input type="hidden" name="isCliente" value={isCliente} />
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="Username" />
+							<input type="text" class="grow" placeholder="Username" name="username" />
 						</label>
 					</div>
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="Email" />
+							<input type="text" class="grow" placeholder="Email" name="email" />
 						</label>
 					</div>
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="password" class="grow" placeholder="Password" />
+							<input type="password" class="grow" placeholder="Password" name="password" />
 						</label>
 					</div>
 					<div class="w-full mt-4 grid grid-cols-2 gap-2">
@@ -122,6 +124,7 @@
 							<input
 								type="text"
 								class="grow"
+								name="cep"
 								placeholder="CEP"
 								on:change={async (e) => {
 									const value = e.target?.value;
@@ -134,25 +137,25 @@
 							/>
 						</label>
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="Street"bind:value={formEndereco.street} />
+							<input type="text" class="grow" placeholder="Rua"bind:value={formEndereco.street} name="street" />
 						</label>
 					</div>
 					<div class="w-full mt-4 grid grid-cols-2 gap-2">
 						
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="Bairro" bind:value={formEndereco.neighborhood} />
+							<input type="text" class="grow" placeholder="Bairro" bind:value={formEndereco.neighborhood} name="bairro" />
 						</label>
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="City" bind:value={formEndereco.city}/>
+							<input type="text" class="grow" placeholder="Cidade" bind:value={formEndereco.city} name="city"/>
 						</label>
 					</div>
 					<div class="w-full mt-4 grid grid-cols-2 gap-2">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="State" bind:value={formEndereco.state}/>
+							<input type="text" class="grow" placeholder="Estado" bind:value={formEndereco.state} name="state"/>
 						</label>
 						
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="text" class="grow" placeholder="Number" bind:value={formEndereco.number}/>
+							<input type="text" class="grow" placeholder="Número" bind:value={formEndereco.number} name="number"/>
 						</label>
 					</div>
 					

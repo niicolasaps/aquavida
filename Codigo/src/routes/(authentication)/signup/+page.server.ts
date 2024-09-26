@@ -4,7 +4,7 @@ import { generateIdFromEntropySize } from 'lucia';
 import { hash } from '@node-rs/argon2';
 
 import type { Actions } from './$types';
-import { userController } from '$lib/server/db/controllers';
+import { clienteController, userController } from '$lib/server/db/controllers';
 
 export const actions: Actions = {
 	default: async (event) => {
@@ -14,6 +14,14 @@ export const actions: Actions = {
 		const email = formData.get('email');
 		// username must be between 4 ~ 31 characters, and only consists of lowercase letters, 0-9, -, and _
 		// keep in mind some database (e.g. mysql) are case insensitive
+
+		const isCliente = formData.get('isCliente') === 'true';
+		const cep = formData.get('cep');
+		const street = formData.get('street');
+		const city = formData.get('city');
+		const state = formData.get('state');
+		const number = formData.get('number');
+		const bairro = formData.get('bairro')
 		if (
 			typeof username !== 'string' ||
 			username.length < 3 ||
@@ -50,18 +58,22 @@ export const actions: Actions = {
 		});
 
 		// TODO: check if username is already used
-		// await db.table("user").insert({
-		// 	id: userId,
-		// 	username: username,
-		// 	password_hash: passwordHash
-		// });
-
 		await userController.insertUser({
 			id: userId,
 			username: username,
 			password_hash: passwordHash,
 			email: email
 		});
+
+		if (isCliente) {
+			await clienteController.insertCliente({
+				name:username,
+				email:email,
+				endereco: `${cep}, ${bairro}, ${city}, ${street}, ${number}, ${state}`,
+				cnpj:'121'
+			});
+		}
+		//TODO: User is not being inserted when is a representante
 
 		const session = await lucia.createSession(userId, {});
 		const sessionCookie = lucia.createSessionCookie(session.id);

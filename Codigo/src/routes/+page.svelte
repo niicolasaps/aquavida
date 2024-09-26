@@ -1,2 +1,7 @@
-<!-- <h1>Welcome to SvelteKit</h1> -->
- 
+<script lang="ts">
+	import { enhance } from "$app/forms";
+</script>
+
+<form method="post" use:enhance>
+    <button>Sign out</button>
+</form>

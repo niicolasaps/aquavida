@@ -8,10 +8,9 @@ import { userController } from '$lib/server/db/controllers';
 export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) redirect(302, "/login");
 	return {
-		username: event.locals.user.name
+		username: event.locals.user.username
 	};
 };
-
 
 export const actions: Actions = {
 	default: async (event) => {

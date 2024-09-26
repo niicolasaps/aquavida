@@ -3,9 +3,9 @@ import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 export const userTable = sqliteTable('user', {
 	id: text('id').primaryKey(),
-    name:text('name').notNull(),
+    username:text('username').notNull(),
     email:text('email').notNull().unique(),
-    password_hash:text('password_hash'),
+    password_hash:text('password_hash').notNull(),
     created_at:text('created_at').default(sql`CURRENT_TIMESTAMP`)
 });
 

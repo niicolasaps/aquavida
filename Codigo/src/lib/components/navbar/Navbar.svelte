@@ -10,6 +10,8 @@
 		</a>
 		<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 			<ThemeSwitch />
+			<a href="/login">login</a>
+			<a href="/signup">cadastrar</a>
 
 			<button
 				data-collapse-toggle="navbar-user"

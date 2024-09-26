@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	// import ClienteModal from '$lib/components/modal/ClienteModal.svelte';
-	import type { SelectCliente, SelectRepresentante } from '$lib/db/schema';
+	import type { SelectCliente, SelectRepresentante } from '$lib/server/db/schema';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

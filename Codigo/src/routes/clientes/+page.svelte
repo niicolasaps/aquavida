@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	// import ClienteModal from '$lib/components/modal/ClienteModal.svelte';
 	import Table from '$lib/components/Table.svelte';
-	import type { SelectCliente } from '$lib/db/schema';
+	import type { SelectCliente } from '$lib/server/db/schema';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { SelectServico } from '$lib/db/schema';
+	import type { SelectServico } from '$lib/server/db/schema';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

@@ -27,7 +27,7 @@
 			<div class="flex items-center gap-x-3">
 				<h2 class="text-lg font-medium">Servicos</h2>
 
-				<span class="px-3 py-1 text-xs bg-info rounded-full text-info-content"
+				<span class="px-3 py-1 text-xs bg-primary rounded-full text-primary-content"
 					>{servicos.length}</span
 				>
 			</div>

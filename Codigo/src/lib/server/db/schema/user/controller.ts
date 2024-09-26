@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm';
 import type { InsertUser, SelectUser } from '.';
 
 async function insertUser(data: InsertUser) {
-	return db.insert(userTable).values(data);
+	return db.insert(userTable).values(data).run()
 }
 
 async function selectAllUsers() {
@@ -20,7 +20,4 @@ export const userController = {
 	insertUser,
 	selectAllUsers,
 	getUserByEmail
-	// selectUserById,
-	// updateUser,
-	// deleteUser
 };

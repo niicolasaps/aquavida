@@ -58,7 +58,7 @@ export const actions: Actions = {
 
 		await userController.insertUser({
 			id: userId,
-			name: username,
+			username: username,
 			password_hash: passwordHash,
 			email: email
 		});

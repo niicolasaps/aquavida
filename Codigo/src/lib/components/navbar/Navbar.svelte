@@ -51,18 +51,23 @@
 					>
 				</li>
 				<li>
-					<a href="/clientes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+					<a href="/admin/clientes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
 						>Clientes</a
 					>
 				</li>
 				<li>
-					<a href="/representantes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+					<a href="/admin/representantes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
 						>Representantes</a
 					>
 				</li>
 				<li>
-					<a href="/servicos" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+					<a href="/admin/servicos" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
 						>Serviços</a
+					>
+				</li>
+				<li>
+					<a href="/customer/solicitar" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+						>Solicitar servico</a
 					>
 				</li>
 			</ul>

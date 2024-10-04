@@ -1,20 +1,18 @@
 import { relations } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { contratoTable } from '../contrato';
-
+import { pedidosClienteTable } from '../cliente';
 
 export const servicoTable = sqliteTable('servico', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
 	name: text('name').notNull(),
-	description: text('description').notNull(),
+	description: text('description').notNull()
 });
 
 export const servicoRelations = relations(servicoTable, ({ many }) => ({
 	contrato: many(servicoToContratoTable),
-	// relatorio: many(relatorioTable, {
-	// 	fields: [servicoTable.id],
-	// 	references: [relatorioTable.servico_id]
-	// }),
+	pedidos: many(servicoToPedidoTable)
+	// relatorio: many(relatorioTable),
 	// template: one(templateTable, {
 	// 	fields: [servicoTable.id],
 	// 	references: [templateTable.servico_id]
@@ -40,6 +38,24 @@ export const servicoToContratoRelations = relations(servicoToContratoTable, ({ o
 	contrato: one(contratoTable, {
 		fields: [servicoToContratoTable.contrato_id],
 		references: [contratoTable.id]
+	})
+}));
+
+export const servicoToPedidoTable = sqliteTable('servico_to_pedido', {
+	servico_id: integer('servico_id')
+		.notNull()
+		.references(() => servicoTable.id),
+	pedido_id: integer('pedido_id').references(() => pedidosClienteTable.id)
+});
+
+export const servitoToPedidoRelations = relations(servicoToPedidoTable, ({ one }) => ({
+	servico: one(servicoTable, {
+		fields: [servicoToPedidoTable.servico_id],
+		references: [servicoTable.id]
+	}),
+	pedido: one(pedidosClienteTable, {
+		fields: [servicoToPedidoTable.pedido_id],
+		references: [pedidosClienteTable.id]
 	})
 }));
 

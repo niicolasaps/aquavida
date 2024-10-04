@@ -2,7 +2,8 @@ import { relations } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { representanteTable } from '../representante';
 import { contratoTable } from '../contrato';
-import { servicoTable } from '../servico';
+import { servicoToPedidoTable } from '../servico';
+import { gerenteTable } from '../gerente';
 
 export const clienteTable = sqliteTable('cliente', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
@@ -15,10 +16,10 @@ export const clienteTable = sqliteTable('cliente', {
 
 export const pedidosClienteTable = sqliteTable('pedidos', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-	status: text('status').notNull(),
+	status: text('status', { enum: ['pendente', 'aderido', 'recusado'] }).notNull(),
 	description: text('description'),
-	servico_id: integer('servico_id').references(() => servicoTable.id),
-	cliente_id: integer('cliente_id').references(() => clienteTable.id)
+	cliente_id: integer('cliente_id').references(() => clienteTable.id),
+	gerente_id: integer('gerente_id').references(() => gerenteTable.id)
 });
 
 export const clienteRelations = relations(clienteTable, ({ one }) => ({
@@ -30,7 +31,18 @@ export const clienteRelations = relations(clienteTable, ({ one }) => ({
 		fields: [clienteTable.id],
 		references: [contratoTable.cliente_id]
 	})
-	
+}));
+
+export const pedidosClienteRelations = relations(pedidosClienteTable, ({ one, many }) => ({
+	gerente: one(gerenteTable, {
+		fields: [pedidosClienteTable.gerente_id],
+		references: [gerenteTable.id]
+	}),
+	cliente: one(clienteTable, {
+		fields: [pedidosClienteTable.cliente_id],
+		references: [clienteTable.id]
+	}),
+	servico: many(servicoToPedidoTable)
 }));
 
 export type SelectCliente = typeof clienteTable.$inferSelect;

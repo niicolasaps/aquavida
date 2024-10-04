@@ -19,14 +19,9 @@ async function updateGerente(id: number, data: Partial<SelectGerente>) {
 	return db.update(gerenteTable).set(data).where(eq(gerenteTable.id, id));
 }
 
-async function deleteGerente(id: number) {
-	return db.delete(gerenteTable).where(eq(gerenteTable.id, id));
-}
-
 export const gerenteController = {
 	insertGerente,
 	selectGerenteById,
 	selectAllGerentes,
 	updateGerente,
-	deleteGerente
 };

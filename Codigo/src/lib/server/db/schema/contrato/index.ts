@@ -10,7 +10,7 @@ export const contratoTable = sqliteTable('contrato', {
 	date_expire: text('date_expire').notNull(),
 	cliente_id: integer('cliente_id').references(() => clienteTable.id),
 	representante_id: integer('representante_id').references(() => representanteTable.id),
-	servico_id: integer('servico_id').references(() => servicoTable.id)
+	// servico_id: integer('servico_id').references(() => servicoTable.id)
 });
 
 export const contratoRelations = relations(contratoTable, ({ one, many }) => ({

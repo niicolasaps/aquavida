@@ -2,7 +2,7 @@ import { relations, sql } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { clienteTable } from '../cliente';
 import { representanteTable } from '../representante';
-import { servicoTable, servicoToContratoTable } from '../servico';
+import { servicoToContratoTable } from '../servico';
 
 export const contratoTable = sqliteTable('contrato', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),

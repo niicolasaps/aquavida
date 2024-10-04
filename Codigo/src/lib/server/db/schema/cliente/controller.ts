@@ -1,6 +1,11 @@
 import { db } from '$lib/server/db';
-import { clienteTable } from '$lib/server/db/schema/cliente';
-import type { InsertCliente, SelectCliente } from '$lib/server/db/schema/cliente';
+import { clienteTable, pedidosClienteTable } from '$lib/server/db/schema/cliente';
+import type {
+	InsertCliente,
+	InsertPedido,
+	SelectCliente,
+	SelectPedido
+} from '$lib/server/db/schema/cliente';
 import { eq } from 'drizzle-orm';
 
 async function insertCliente(data: InsertCliente) {
@@ -22,10 +27,25 @@ async function deleteCliente(id: number) {
 	return db.delete(clienteTable).where(eq(clienteTable.id, id));
 }
 
+async function insertPedido(data: InsertPedido) {
+	return db.insert(pedidosClienteTable).values(data);
+}
+
+async function selectAllPedidos() {
+	return db.select().from(pedidosClienteTable);
+}
+
+async function updatePedido(id: number, data: Partial<SelectPedido>) {
+	// return db.update(pedidosClienteTable).set(data.status).where(eq(pedidosClienteTable.id, id));
+}
+
 export const clienteController = {
 	insertCliente,
 	selectClienteById,
 	selectAllClientes,
 	updateCliente,
-	deleteCliente
+	deleteCliente,
+	insertPedido,
+	selectAllPedidos,
+	updatePedido
 };

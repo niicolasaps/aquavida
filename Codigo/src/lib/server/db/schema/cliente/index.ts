@@ -14,14 +14,6 @@ export const clienteTable = sqliteTable('cliente', {
 	representante_id: integer('representante_id').references(() => representanteTable.id)
 });
 
-export const pedidosClienteTable = sqliteTable('pedidos', {
-	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-	status: text('status', { enum: ['pendente', 'aderido', 'recusado'] }).notNull(),
-	description: text('description'),
-	cliente_id: integer('cliente_id').references(() => clienteTable.id),
-	gerente_id: integer('gerente_id').references(() => gerenteTable.id)
-});
-
 export const clienteRelations = relations(clienteTable, ({ one }) => ({
 	representante: one(representanteTable, {
 		fields: [clienteTable.representante_id],
@@ -32,6 +24,18 @@ export const clienteRelations = relations(clienteTable, ({ one }) => ({
 		references: [contratoTable.cliente_id]
 	})
 }));
+
+export type SelectCliente = typeof clienteTable.$inferSelect;
+export type InsertCliente = typeof clienteTable.$inferInsert;
+
+export const pedidosClienteTable = sqliteTable('pedidos', {
+	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+	status: text('status', { enum: ['pendente', 'aderido', 'recusado'] }).notNull(),
+	description: text('description'),
+	cliente_id: integer('cliente_id').references(() => clienteTable.id),
+	gerente_id: integer('gerente_id').references(() => gerenteTable.id)
+});
+
 
 export const pedidosClienteRelations = relations(pedidosClienteTable, ({ one, many }) => ({
 	gerente: one(gerenteTable, {
@@ -45,5 +49,6 @@ export const pedidosClienteRelations = relations(pedidosClienteTable, ({ one, ma
 	servico: many(servicoToPedidoTable)
 }));
 
-export type SelectCliente = typeof clienteTable.$inferSelect;
-export type InsertCliente = typeof clienteTable.$inferInsert;
+export type SelectPedido = typeof pedidosClienteTable.$inferSelect;
+export type InsertPedido = typeof pedidosClienteTable.$inferInsert;
+

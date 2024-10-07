@@ -1,7 +1,7 @@
 <script>
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import { getUserContext } from '$lib/stores/user';
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms';
 
 	const user = getUserContext();
 </script>
@@ -12,17 +12,35 @@
 			<!-- <img src="logo" class="h-8" alt="Aqua vida logo" /> -->
 			<span class="self-center text-2xl font-semibold whitespace-nowrap">Aqua vida</span>
 		</a>
-		<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-			<ThemeSwitch />
+		<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
+			
 			{#if $user}
-				{$user.username}
+				<div class="dropdown dropdown-end dropdown-bottom">
+					<div title="Themes" role="button" tabindex="0" class="btn btn-primary">
+						{$user.username}
+					</div>
+
+					<div
+						class="dropdown-content z-10 mt-2 flex w-40 flex-col gap-2 overflow-y-scroll rounded-box bg-base-200 p-4 shadow-lg"
+					>
+					<a href="/profile" class="btn btn-secondary btn-sm flex justify-between w-full">
+						<span>Meu perfil</span>
+					</a>
+					<form method="post" use:enhance class="w-full">
+						<button class="btn btn-primary btn-sm flex justify-between w-full">
+							<span>Logout</span>
+						</button>
+					</form>
+					</div>
+				</div>
+				<ThemeSwitch />
+				<!-- {$user.username}
 				<form method="post" use:enhance>
 					<button>Sign out</button>
-				</form>
-				
+				</form> -->
 			{:else}
-				<a href="/login">login</a>
-				<a href="/signup">cadastrar</a>
+				<a href="/login" class="btn btn-primary">Login</a>
+				<!-- <a href="/signup">cadastrar</a> -->
 			{/if}
 
 			<button

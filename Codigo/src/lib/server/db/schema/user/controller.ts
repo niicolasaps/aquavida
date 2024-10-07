@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { db } from '$lib/server/db';
-import { userTable } from '$lib/server/db/schema/user';
+import { sessionTable, userTable } from '$lib/server/db/schema/user';
 import { eq } from 'drizzle-orm';
 import type { InsertUser, SelectUser } from '.';
 
@@ -15,9 +15,13 @@ async function selectAllUsers() {
 async function getUserByEmail(email: string) {
 	return db.select().from(userTable).where(eq(userTable.email, email)).limit(1);
 }
+async function getSessions (userId: SelectUser['id']) {
+    return db.select().from(sessionTable).where(eq(sessionTable.userId, userId))
+  }
 
 export const userController = {
 	insertUser,
 	selectAllUsers,
-	getUserByEmail
+	getUserByEmail,
+	getSessions
 };

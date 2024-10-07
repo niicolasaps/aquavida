@@ -13,7 +13,7 @@ import { userController } from '$lib/server/db/controllers';
 // };
 
 export const actions: Actions = {
-	default: async (event) => {
+	login: async (event) => {
 		const formData = await event.request.formData();
 		const email = formData.get('email');
 		const password = formData.get('password');
@@ -67,5 +67,17 @@ export const actions: Actions = {
 		});
 
 		redirect(302, '/');
+	},
+	logout: async (event) => {
+		if (!event.locals.session) {
+			return fail(401);
+		}
+		await lucia.invalidateSession(event.locals.session.id);
+		const sessionCookie = lucia.createBlankSessionCookie();
+		event.cookies.set(sessionCookie.name, sessionCookie.value, {
+			path: '.',
+			...sessionCookie.attributes
+		});
+		redirect(302, '/login');
 	}
 };

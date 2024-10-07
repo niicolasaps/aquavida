@@ -7,7 +7,7 @@
 		<div class="px-6 py-4">
 			<h3 class="mt-3 text-xl font-medium text-center text-opacity-60">Bem vindo de volta!</h3>
 
-			<form method="post" use:enhance>
+			<form method="post" use:enhance action="?/login">
 				<div class="w-full mt-4">
 					<label class="input input-bordered flex items-center gap-2">
 						<input type="text" class="grow" placeholder="Email" name="email" />

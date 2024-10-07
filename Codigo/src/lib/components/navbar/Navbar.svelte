@@ -26,7 +26,7 @@
 					<a href="/profile" class="btn btn-secondary btn-sm flex justify-between w-full">
 						<span>Meu perfil</span>
 					</a>
-					<form method="post" use:enhance class="w-full">
+					<form method="post" action="/login?/logout" class="w-full">
 						<button class="btn btn-primary btn-sm flex justify-between w-full">
 							<span>Logout</span>
 						</button>

@@ -5,6 +5,7 @@ export const userTable = sqliteTable('user', {
 	id: text('id').primaryKey(),
     username:text('username').notNull(),
     email:text('email').notNull().unique(),
+	tipo:text('tipo', { enum: ['representante', 'gerente', 'cliente'] }).notNull(),
     password_hash:text('password_hash').notNull(),
     created_at:text('created_at').default(sql`CURRENT_TIMESTAMP`)
 });

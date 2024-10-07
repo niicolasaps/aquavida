@@ -4,7 +4,7 @@ import { generateIdFromEntropySize } from 'lucia';
 import { hash } from '@node-rs/argon2';
 
 import type { Actions } from './$types';
-import { clienteController, userController } from '$lib/server/db/controllers';
+import { clienteController, representanteController, userController } from '$lib/server/db/controllers';
 
 export const actions: Actions = {
 	default: async (event) => {
@@ -21,7 +21,7 @@ export const actions: Actions = {
 		const city = formData.get('city');
 		const state = formData.get('state');
 		const number = formData.get('number');
-		const bairro = formData.get('bairro')
+		const bairro = formData.get('bairro');
 		if (
 			typeof username !== 'string' ||
 			username.length < 3 ||
@@ -62,16 +62,22 @@ export const actions: Actions = {
 			id: userId,
 			username: username,
 			password_hash: passwordHash,
-			email: email
+			email: email,
+			tipo: isCliente ? 'cliente' : 'representante'
 		});
 
 		if (isCliente) {
 			await clienteController.insertCliente({
-				name:username,
-				email:email,
+				name: username,
+				email: email,
 				endereco: `${cep}, ${bairro}, ${city}, ${street}, ${number}, ${state}`,
-				cnpj:'121'
+				cnpj: '121'
 			});
+		} else {
+			await representanteController.insertRepresentante({
+				name: username,
+				email:email
+			})
 		}
 		//TODO: User is not being inserted when is a representante
 

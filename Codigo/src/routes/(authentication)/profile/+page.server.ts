@@ -8,7 +8,7 @@ export const load = (async () => {
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-	logout: async (event) => {
+	default: async (event) => {
 		if (!event.locals.session) {
 			return fail(401);
 		}

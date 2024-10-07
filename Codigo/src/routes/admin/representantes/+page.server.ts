@@ -11,8 +11,9 @@ export const actions: Actions = {
 	create: async ({ request }) => {
 		const data = await request.formData();
 		const name = String(data.get('name'));
+		const email = String(data.get('email'))
 
-		await representanteController.insertRepresentante({ name });
+		await representanteController.insertRepresentante({ name,email });
 	},
 	delete: async ({ request }) => {
 		const data = await request.formData();

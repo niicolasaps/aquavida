@@ -7,6 +7,7 @@ import { contratoTable } from '../contrato';
 export const representanteTable = sqliteTable('representante', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
 	name: text('name').notNull(),
+	email: text('email').notNull(),
 	gerente_id: integer('gerente_id').references(() => gerenteTable.id)
 });
 

@@ -1,5 +1,9 @@
 <script>
 	import ThemeSwitch from './ThemeSwitch.svelte';
+	import { getUserContext } from '$lib/stores/user';
+	import { enhance } from "$app/forms";
+
+	const user = getUserContext();
 </script>
 
 <nav class="bg-base-200">
@@ -10,8 +14,16 @@
 		</a>
 		<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
 			<ThemeSwitch />
-			<a href="/login">login</a>
-			<a href="/signup">cadastrar</a>
+			{#if $user}
+				{$user.username}
+				<form method="post" use:enhance>
+					<button>Sign out</button>
+				</form>
+				
+			{:else}
+				<a href="/login">login</a>
+				<a href="/signup">cadastrar</a>
+			{/if}
 
 			<button
 				data-collapse-toggle="navbar-user"
@@ -56,8 +68,9 @@
 					>
 				</li>
 				<li>
-					<a href="/admin/representantes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
-						>Representantes</a
+					<a
+						href="/admin/representantes"
+						class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Representantes</a
 					>
 				</li>
 				<li>
@@ -66,8 +79,9 @@
 					>
 				</li>
 				<li>
-					<a href="/customer/solicitar" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
-						>Solicitar servico</a
+					<a
+						href="/customer/solicitar"
+						class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Solicitar servico</a
 					>
 				</li>
 			</ul>

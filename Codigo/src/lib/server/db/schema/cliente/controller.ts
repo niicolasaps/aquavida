@@ -36,7 +36,7 @@ async function selectAllPedidos() {
 }
 
 async function updatePedido(id: number, data: Partial<SelectPedido>) {
-	// return db.update(pedidosClienteTable).set(data.status).where(eq(pedidosClienteTable.id, id));
+	return db.update(pedidosClienteTable).set(data).where(eq(pedidosClienteTable.id, id));
 }
 
 export const clienteController = {

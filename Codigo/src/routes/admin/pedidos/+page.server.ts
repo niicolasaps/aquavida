@@ -7,7 +7,7 @@ export const load = (async () => {
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-	aderirPedido: async ({ request }) => {
+	aceitarPedido: async ({ request }) => {
 		const data = await request.formData();
 		const pedidoId = Number(data.get('pedidoId'));
 

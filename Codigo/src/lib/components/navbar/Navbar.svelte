@@ -13,7 +13,6 @@
 			<span class="self-center text-2xl font-semibold whitespace-nowrap">Aqua vida</span>
 		</a>
 		<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
-			
 			{#if $user}
 				<div class="dropdown dropdown-end dropdown-bottom">
 					<div title="Themes" role="button" tabindex="0" class="btn btn-primary">
@@ -23,14 +22,14 @@
 					<div
 						class="dropdown-content z-10 mt-2 flex w-40 flex-col gap-2 overflow-y-scroll rounded-box bg-base-200 p-4 shadow-lg"
 					>
-					<a href="/profile" class="btn btn-secondary btn-sm flex justify-between w-full">
-						<span>Meu perfil</span>
-					</a>
-					<form method="post" action="/login?/logout" class="w-full">
-						<button class="btn btn-primary btn-sm flex justify-between w-full">
-							<span>Logout</span>
-						</button>
-					</form>
+						<a href="/profile" class="btn btn-secondary btn-sm flex justify-between w-full">
+							<span>Meu perfil</span>
+						</a>
+						<form method="post" action="/login?/logout" class="w-full">
+							<button class="btn btn-primary btn-sm flex justify-between w-full">
+								<span>Logout</span>
+							</button>
+						</form>
 					</div>
 				</div>
 				<ThemeSwitch />
@@ -80,28 +79,30 @@
 						>Página inicial</a
 					>
 				</li>
-				<li>
-					<a href="/admin/clientes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
-						>Clientes</a
-					>
-				</li>
-				<li>
-					<a
-						href="/admin/representantes"
-						class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Representantes</a
-					>
-				</li>
-				<li>
-					<a href="/admin/servicos" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
-						>Serviços</a
-					>
-				</li>
-				<li>
-					<a
-						href="/customer/solicitar"
-						class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Solicitar servico</a
-					>
-				</li>
+				{#if $user}
+					<li>
+						<a href="/admin/clientes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+							>Clientes</a
+						>
+					</li>
+					<li>
+						<a
+							href="/admin/representantes"
+							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Representantes</a
+						>
+					</li>
+					<li>
+						<a href="/admin/servicos" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
+							>Serviços</a
+						>
+					</li>
+					<li>
+						<a
+							href="/customer/solicitar"
+							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Solicitar servico</a
+						>
+					</li>
+				{/if}
 			</ul>
 		</div>
 	</div>

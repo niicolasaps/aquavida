@@ -6,6 +6,7 @@
 	import { themeChange } from 'theme-change';
 	import { createUserContext } from '$lib/stores/user';
 	import type { LayoutData } from './$types';
+	import { redirect } from '@sveltejs/kit';
 
 	export let data: LayoutData;
 
@@ -15,6 +16,7 @@
 
 	const user = createUserContext(data.user);
 	$: user.set(data.user);
+
 </script>
 
 <div>

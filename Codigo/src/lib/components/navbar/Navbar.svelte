@@ -102,6 +102,12 @@
 							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Solicitar servico</a
 						>
 					</li>
+					<li>
+						<a
+							href="/admin/pedidos"
+							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Pedidos</a
+						>
+					</li>
 				{/if}
 			</ul>
 		</div>

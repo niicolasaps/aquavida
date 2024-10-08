@@ -2,7 +2,7 @@ import { relations } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { representanteTable } from '../representante';
 import { contratoTable } from '../contrato';
-import { servicoToPedidoTable } from '../servico';
+import { servicoTable, servicoToPedidoTable } from '../servico';
 import { gerenteTable } from '../gerente';
 
 export const clienteTable = sqliteTable('cliente', {
@@ -33,9 +33,9 @@ export const pedidosClienteTable = sqliteTable('pedidos', {
 	status: text('status', { enum: ['pendente', 'aderido', 'recusado'] }).notNull(),
 	description: text('description'),
 	cliente_id: integer('cliente_id').references(() => clienteTable.id),
-	gerente_id: integer('gerente_id').references(() => gerenteTable.id)
+	gerente_id: integer('gerente_id').references(() => gerenteTable.id),
+	servico_id: integer('servico_id').references(() => servicoTable.id)
 });
-
 
 export const pedidosClienteRelations = relations(pedidosClienteTable, ({ one, many }) => ({
 	gerente: one(gerenteTable, {
@@ -51,4 +51,3 @@ export const pedidosClienteRelations = relations(pedidosClienteTable, ({ one, ma
 
 export type SelectPedido = typeof pedidosClienteTable.$inferSelect;
 export type InsertPedido = typeof pedidosClienteTable.$inferInsert;
-

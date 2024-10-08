@@ -5,11 +5,11 @@
 
 	export let data: PageData;
 
-	let pedidos: SelectPedido[] = data.pedidos;
+	let pedidos = data.pedidos;
 
-	let pedidosPendentes = pedidos.filter(pedido => pedido.status === 'pendente');
-	let pedidosAceitos = pedidos.filter(pedido => pedido.status === 'aderido');
-	let pedidosRecusados = pedidos.filter(pedido => pedido.status === 'recusado');
+	let pedidosPendentes = pedidos.filter(pedido => pedido.pedidos.status === 'pendente');
+	let pedidosAceitos = pedidos.filter(pedido => pedido.pedidos.status === 'aderido');
+	let pedidosRecusados = pedidos.filter(pedido => pedido.pedidos.status === 'recusado');
 </script>
 
 <main class="mt-5">
@@ -39,12 +39,15 @@
 									<thead class="bg-base-200">
 										<tr>
 											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
-												Nome do Pedido
+												Pedido
 											</th>
 											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
 												Descrição
 											</th>
-											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left"> Status </th>
+											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+												Serviço
+											</th>
+											
 											<th scope="col" class="relative py-3.5 px-4">
 												<span class="sr-only">Ações</span>
 											</th>
@@ -54,23 +57,24 @@
 										{#each pedidosPendentes as pedido}
 											<tr>
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
-													{pedido.id}
+													{pedido.pedidos.id}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
-													{pedido.description}
+													{pedido.pedidos.description}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
-													{pedido.status}
+													{pedido.servico?.name}
 												</td>
+												
 												<td class="px-4 py-4 text-sm whitespace-nowrap">
 													<div class="flex items-center gap-x-6">
 														<form method="POST" action="?/aceitarPedido" use:enhance>
-															<input type="hidden" name="pedidoId" value={pedido.id} />
+															<input type="hidden" name="pedidoId" value={pedido.pedidos.id} />
 															<button class="btn btn-success text-white">Aceitar</button>
 														</form>
 
 														<form method="POST" action="?/recusarPedido" use:enhance>
-															<input type="hidden" name="pedidoId" value={pedido.id} />
+															<input type="hidden" name="pedidoId" value={pedido.pedidos.id} />
 															<button class="btn btn-error text-white">Recusar</button>
 														</form>
 													</div>
@@ -98,26 +102,30 @@
 									<thead class="bg-base-200">
 										<tr>
 											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
-												Nome do Pedido
+												Pedido
 											</th>
 											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
 												Descrição
 											</th>
-											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left"> Status </th>
+											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+												Serviço
+											</th>
+											
 										</tr>
 									</thead>
 									<tbody class="bg-base-200 bg-opacity-20 divide-y divide-base-300">
 										{#each pedidosAceitos as pedido}
 											<tr>
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
-													{pedido.id}
+													{pedido.pedidos.id}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
-													{pedido.description}
+													{pedido.pedidos.description}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
-													{pedido.status}
+													{pedido.servico?.name}
 												</td>
+												
 											</tr>
 										{/each}
 									</tbody>
@@ -141,26 +149,30 @@
 									<thead class="bg-base-200">
 										<tr>
 											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
-												Nome do Pedido
+												Pedido
 											</th>
 											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
 												Descrição
 											</th>
-											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left"> Status </th>
+											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+												Serviço
+											</th>
+											
 										</tr>
 									</thead>
 									<tbody class="bg-base-200 bg-opacity-20 divide-y divide-base-300">
 										{#each pedidosRecusados as pedido}
 											<tr>
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
-													{pedido.id}
+													{pedido.pedidos.id}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
-													{pedido.description}
+													{pedido.pedidos.description}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
-													{pedido.status}
+													{pedido.servico?.name}
 												</td>
+												
 											</tr>
 										{/each}
 									</tbody>

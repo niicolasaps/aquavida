@@ -7,6 +7,7 @@ import type {
 	SelectPedido
 } from '$lib/server/db/schema/cliente';
 import { eq } from 'drizzle-orm';
+import { servicoTable } from '../servico';
 
 async function insertCliente(data: InsertCliente) {
 	return db.insert(clienteTable).values(data);
@@ -32,7 +33,7 @@ async function insertPedido(data: InsertPedido) {
 }
 
 async function selectAllPedidos() {
-	return db.select().from(pedidosClienteTable);
+	return db.select().from(pedidosClienteTable).leftJoin(servicoTable,eq(servicoTable.id,pedidosClienteTable.servico_id))
 }
 
 async function updatePedido(id: number, data: Partial<SelectPedido>) {

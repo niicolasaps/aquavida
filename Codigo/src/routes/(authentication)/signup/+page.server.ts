@@ -4,7 +4,11 @@ import { generateIdFromEntropySize } from 'lucia';
 import { hash } from '@node-rs/argon2';
 
 import type { Actions } from './$types';
-import { clienteController, representanteController, userController } from '$lib/server/db/controllers';
+import {
+	clienteController,
+	representanteController,
+	userController
+} from '$lib/server/db/controllers';
 
 export const actions: Actions = {
 	default: async (event) => {
@@ -48,10 +52,12 @@ export const actions: Actions = {
 			});
 		}
 
-		if(typeof cep !='string' || cep.length !== 8) {
-			return fail(400, {
-				message: 'CEP deve conter 8 dígitos'
-			});
+		if (isCliente) {
+			if (typeof cep != 'string' || cep.length !== 8) {
+				return fail(400, {
+					message: 'CEP deve conter 8 dígitos'
+				});
+			}
 		}
 
 		const userId = generateIdFromEntropySize(10); // 16 characters long
@@ -82,8 +88,8 @@ export const actions: Actions = {
 		} else {
 			await representanteController.insertRepresentante({
 				name: username,
-				email:email
-			})
+				email: email
+			});
 		}
 		//TODO: User is not being inserted when is a representante
 

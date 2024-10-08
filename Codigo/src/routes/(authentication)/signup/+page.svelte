@@ -3,8 +3,11 @@
 	import { enhance } from '$app/forms';
 	import { getEnderecoFromCEP } from '$lib/utils/utils';
 
+	export let form
+
 	let isCliente = false;
 	let isRepresentante = false;
+	let isLoading = false;
 
 	let formEndereco = {
 		number: '',
@@ -67,7 +70,13 @@
 			{/if}
 			{#if isRepresentante}
 				<h3 class="mt-3 text-xl font-medium text-center text-opacity-60">Criar sua conta!</h3>
-				<form method="post" use:enhance>
+				<form method="post" use:enhance={() => {
+					isLoading = true;
+					return async ({ update }) => {
+						isLoading = false;
+						update();
+					};
+				}}>
 					<input type="hidden" name="isCliente" value={isCliente} />
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
@@ -96,13 +105,23 @@
 						</label>
 					</div>
 
-					<button class="btn btn-primary w-full mt-4"> Registrar </button>
+					<button class="btn btn-primary w-full mt-4" disabled={isLoading}>{isLoading?'Registrando...':'Registrar'}</button>
+
+					{#if form?.message}
+						<p class="text-error text-center">{form.message}</p>
+					{/if}
 				</form>
 			{:else if isCliente}
 				<h3 class="mt-3 text-xl font-medium text-center text-opacity-60">
 					Criar sua conta de Cliente!
 				</h3>
-				<form method="post" use:enhance>
+				<form method="post" use:enhance={() => {
+					isLoading = true;
+					return async ({ update }) => {
+						isLoading = false;
+						update();
+					};
+				}}>
 					<input type="hidden" name="isCliente" value={isCliente} />
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
@@ -160,7 +179,11 @@
 					</div>
 					
 					
-					<button class="btn btn-primary w-full mt-4">Registrar</button>
+					<button class="btn btn-primary w-full mt-4" disabled={isLoading}>{isLoading?'Registrando...':'Registrar'}</button>
+
+					{#if form?.message}
+						<p class="text-error text-center">{form.message}</p>
+					{/if}
 				</form>
 			{:else}
 				<h3 class="mt-3 text-xl font-medium text-center text-opacity-60">

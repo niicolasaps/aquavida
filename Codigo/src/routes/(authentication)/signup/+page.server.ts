@@ -29,12 +29,12 @@ export const actions: Actions = {
 			!/^[a-z0-9_-]+$/.test(username)
 		) {
 			return fail(400, {
-				message: 'Invalid username'
+				message: 'Nome de úsuario inválido'
 			});
 		}
 		if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
 			return fail(400, {
-				message: 'Invalid password'
+				message: 'Senha inválida'
 			});
 		}
 		if (
@@ -44,7 +44,13 @@ export const actions: Actions = {
 			!email.includes('@')
 		) {
 			return fail(400, {
-				message: 'Invalid email'
+				message: 'Email inválido'
+			});
+		}
+
+		if(typeof cep !='string' || cep.length !== 8) {
+			return fail(400, {
+				message: 'CEP deve conter 8 dígitos'
 			});
 		}
 

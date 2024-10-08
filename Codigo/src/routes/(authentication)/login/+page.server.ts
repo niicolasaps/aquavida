@@ -25,25 +25,25 @@ export const actions: Actions = {
 			!/.+@.+/.test(email)
 		) {
 			return fail(400, {
-				message: 'Invalid email'
+				message: 'Email inválido'
 			});
 		}
 		if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
 			return fail(400, {
-				message: 'Invalid password'
+				message: 'Senha inválida'
 			});
 		}
         
         if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
 			return fail(400, {
-				message: 'Invalid email or password'
+				message: 'Email ou senha inválidos'
 			});
 		}
 
 		const [existingUser] = await userController.getUserByEmail(email);
 		if (!existingUser) {
 			return fail(400, {
-				message: 'Incorrect username or password'
+				message: 'Nome de usuario ou senha inválidos'
 			});
 		}
 
@@ -55,7 +55,7 @@ export const actions: Actions = {
 		});
 		if (!validPassword) {
 			return fail(400, {
-				message: 'Incorrect username or password'
+				message: 'Nome de usuario ou senha inválidos'
 			});
 		}
 

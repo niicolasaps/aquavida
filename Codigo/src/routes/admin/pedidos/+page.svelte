@@ -41,10 +41,13 @@
 											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
 												Pedido
 											</th>
-											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
+												Cliente
+											</th>
+											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left">
 												Descrição
 											</th>
-											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left">
 												Serviço
 											</th>
 											
@@ -59,6 +62,9 @@
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
 													{pedido.pedidos.id}
 												</td>
+												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
+													{pedido.cliente?.name}
+												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
 													{pedido.pedidos.description}
 												</td>
@@ -68,12 +74,20 @@
 												
 												<td class="px-4 py-4 text-sm whitespace-nowrap">
 													<div class="flex items-center gap-x-6">
-														<form method="POST" action="?/aceitarPedido" use:enhance>
+														<form method="POST" action="?/aceitarPedido" use:enhance={()=>{
+															setTimeout(()=>{
+																window.location.reload()
+															},2000)
+															}}>
 															<input type="hidden" name="pedidoId" value={pedido.pedidos.id} />
 															<button class="btn btn-success text-white">Aceitar</button>
 														</form>
 
-														<form method="POST" action="?/recusarPedido" use:enhance>
+														<form method="POST" action="?/recusarPedido" use:enhance={()=>{
+															setTimeout(()=>{
+																window.location.reload()
+															},2000)
+															}}>
 															<input type="hidden" name="pedidoId" value={pedido.pedidos.id} />
 															<button class="btn btn-error text-white">Recusar</button>
 														</form>
@@ -104,10 +118,13 @@
 											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
 												Pedido
 											</th>
-											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
+												Cliente
+											</th>
+											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
 												Descrição
 											</th>
-											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
 												Serviço
 											</th>
 											
@@ -118,6 +135,9 @@
 											<tr>
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
 													{pedido.pedidos.id}
+												</td>
+												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
+													{pedido.cliente?.name}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
 													{pedido.pedidos.description}
@@ -151,10 +171,13 @@
 											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
 												Pedido
 											</th>
-											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+											<th scope="col" class="py-3.5 px-4 text-sm font-normal text-left">
+												Cliente
+											</th>
+											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left">
 												Descrição
 											</th>
-											<th scope="col" class="px-12 py-3.5 text-sm font-normal text-left">
+											<th scope="col" class="px-4 py-3.5 text-sm font-normal text-left">
 												Serviço
 											</th>
 											
@@ -165,6 +188,9 @@
 											<tr>
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
 													{pedido.pedidos.id}
+												</td>
+												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
+													{pedido.cliente?.name}
 												</td>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
 													{pedido.pedidos.description}

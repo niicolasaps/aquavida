@@ -16,6 +16,16 @@ async function selectClienteById(id: number) {
 	return db.select().from(clienteTable).where(eq(clienteTable.id, id));
 }
 
+async function getClienteByEmail(email: string) {
+	const cliente = await db
+		.select()
+		.from(clienteTable)
+		.where(eq(clienteTable.email, email))
+		.limit(1);
+
+	return cliente[0] || null;
+}
+
 async function selectAllClientes() {
 	return db.select().from(clienteTable);
 }
@@ -33,7 +43,11 @@ async function insertPedido(data: InsertPedido) {
 }
 
 async function selectAllPedidos() {
-	return db.select().from(pedidosClienteTable).leftJoin(servicoTable,eq(servicoTable.id,pedidosClienteTable.servico_id))
+	return db
+		.select()
+		.from(pedidosClienteTable)
+		.leftJoin(servicoTable, eq(servicoTable.id, pedidosClienteTable.servico_id))
+		.leftJoin(clienteTable, eq(clienteTable.id, pedidosClienteTable.cliente_id));
 }
 
 async function updatePedido(id: number, data: Partial<SelectPedido>) {
@@ -48,5 +62,6 @@ export const clienteController = {
 	deleteCliente,
 	insertPedido,
 	selectAllPedidos,
-	updatePedido
+	updatePedido,
+	getClienteByEmail
 };

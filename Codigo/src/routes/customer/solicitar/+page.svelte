@@ -1,6 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
+	import { getUserContext } from '$lib/stores/user';
+
+	const user = getUserContext();
+
 	export let data: PageData;
 	export let form;
 
@@ -20,7 +24,7 @@
 				{#each servicos as servico}
 					<option value={servico.id}>{servico.name}</option>
 				{/each}
-				<option value="outro">Outro</option>
+				<!-- <option value="outro">Outro</option> -->
 			</select>
 		</label>
 

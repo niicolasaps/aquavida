@@ -80,7 +80,7 @@
 															},2000)
 															}}>
 															<input type="hidden" name="pedidoId" value={pedido.pedidos.id} />
-															<button class="btn btn-success text-white">Aceitar</button>
+															<button class="btn btn-primary text-white">Aceitar</button>
 														</form>
 
 														<form method="POST" action="?/recusarPedido" use:enhance={()=>{

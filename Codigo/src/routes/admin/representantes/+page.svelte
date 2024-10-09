@@ -6,7 +6,7 @@
 
 	export let data: PageData;
 
-	export let form
+	export let form;
 
 	let representantes = data.representantes;
 	let isOpenModal: HTMLDialogElement | null = null;
@@ -16,8 +16,8 @@
 	let selectedRepresentante: SelectRepresentante = {
 		id: 1,
 		name: '',
-		cpf:'',
-		email:'',
+		cpf: '',
+		email: '',
 		gerente_id: 1
 	};
 
@@ -92,6 +92,21 @@
 												<span>CPF</span>
 											</div>
 										</th>
+										<th
+											scope="col"
+											class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-opacity-50"
+										>
+											<div class="flex items-center gap-x-3">
+												<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
+												<span>email</span>
+											</div>
+										</th>
+										<th>
+											<div class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-opacity-50">
+												<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
+												<span>Já cadastrou?</span>
+											</div>
+										</th>
 
 										<!-- <th
 										scope="col"
@@ -148,9 +163,15 @@
 												</div>
 											</td>
 											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
-											>{representante.cpf}</td
-										>
-										<!-- <td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
+												>{representante.cpf}</td
+											>
+											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
+												>{representante.email ? representante.email : 'Sem email'}</td
+											>
+											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
+												>{representante.email ? 'Cadastrado' : 'Não cadastrado'}</td
+											>
+											<!-- <td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
 											>{cliente.cpf}</td
 										>
 										<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
@@ -243,7 +264,6 @@
 				</label>
 
 				<label class="input input-bordered flex items-center gap-2">
-					
 					<input type="text" class="grow" placeholder="CPF" name="cpf" />
 				</label>
 				<button class="btn btn-info" type="submit">Criar representante</button>
@@ -290,8 +310,13 @@
 				</label>
 
 				<label class="input input-bordered flex items-center gap-2">
-					
-					<input type="text" class="grow" placeholder="CPF" name="cpf"value={selectedRepresentante.cpf} />
+					<input
+						type="text"
+						class="grow"
+						placeholder="CPF"
+						name="cpf"
+						value={selectedRepresentante.cpf}
+					/>
 				</label>
 				<button class="btn btn-info" type="submit">Atualizar representante</button>
 			</div>

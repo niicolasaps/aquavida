@@ -24,6 +24,8 @@
 		selectedCliente = { ...cliente };
 		isOpenModalUpdate?.showModal();
 	}
+
+	//TODO: No edit do cliente poder colocar um representante
 </script>
 
 <main class="mt-5">

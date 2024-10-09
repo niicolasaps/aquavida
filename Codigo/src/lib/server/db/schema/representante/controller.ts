@@ -15,6 +15,12 @@ async function selectAllRepresentantes() {
 	return db.select().from(representanteTable);
 }
 
+async function getRepresentanteByCPF(cpf: string) {
+	const representantes = await db.select().from(representanteTable).where(eq(representanteTable.cpf, cpf)).limit(1);
+	return representantes.length > 0 ? representantes[0] : null;
+}
+
+
 async function updateRepresentante(id: number, data: Partial<SelectRepresentante>) {
 	return db.update(representanteTable).set(data).where(eq(representanteTable.id, id));
 }
@@ -28,5 +34,6 @@ export const representanteController = {
 	selectRepresentanteById,
 	selectAllRepresentantes,
 	updateRepresentante,
-	deleteRepresentante
+	deleteRepresentante,
+	getRepresentanteByCPF
 };

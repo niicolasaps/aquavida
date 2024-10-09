@@ -16,6 +16,7 @@ export const actions: Actions = {
 		const username = formData.get('username');
 		const password = formData.get('password');
 		const email = formData.get('email');
+		const cpf = String(formData.get('cpf'))
 		// username must be between 4 ~ 31 characters, and only consists of lowercase letters, 0-9, -, and _
 		// keep in mind some database (e.g. mysql) are case insensitive
 
@@ -60,14 +61,23 @@ export const actions: Actions = {
 			}
 		}
 
-		const userId = generateIdFromEntropySize(10); // 16 characters long
+		const userId = generateIdFromEntropySize(10);
 		const passwordHash = await hash(password, {
-			// recommended minimum parameters
 			memoryCost: 19456,
 			timeCost: 2,
 			outputLen: 32,
 			parallelism: 1
 		});
+
+		const existingRepresentante = await representanteController.getRepresentanteByCPF(cpf as string);
+
+		if(!isCliente && !existingRepresentante) {
+			return fail(400, {
+				message: 'Nenhum representante com esse CPF'
+			});
+		}
+
+		//TODO: Quando um representante já ta cadastrado não deixar fazer o update
 
 		// TODO: check if username is already used
 		await userController.insertUser({
@@ -83,15 +93,14 @@ export const actions: Actions = {
 				name: username,
 				email: email,
 				endereco: `${cep}, ${bairro}, ${city}, ${street}, ${number}, ${state}`,
-				cnpj: '121'
+				cnpj: cpf
 			});
-		} else {
-			await representanteController.insertRepresentante({
+		} else if (existingRepresentante) {
+			await representanteController.updateRepresentante(existingRepresentante.id, {
 				name: username,
-				email: email
+				email: email,
 			});
 		}
-		//TODO: User is not being inserted when is a representante
 
 		const session = await lucia.createSession(userId, {});
 		const sessionCookie = lucia.createSessionCookie(session.id);

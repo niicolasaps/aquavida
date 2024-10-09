@@ -6,6 +6,8 @@
 
 	export let data: PageData;
 
+	export let form
+
 	let representantes = data.representantes;
 	let isOpenModal: HTMLDialogElement | null = null;
 	let isOpenModalUpdate: HTMLDialogElement | null = null;
@@ -14,6 +16,7 @@
 	let selectedRepresentante: SelectRepresentante = {
 		id: 1,
 		name: '',
+		cpf:'',
 		email:'',
 		gerente_id: 1
 	};
@@ -80,6 +83,15 @@
 												<span>Nome</span>
 											</div>
 										</th>
+										<th
+											scope="col"
+											class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-opacity-50"
+										>
+											<div class="flex items-center gap-x-3">
+												<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
+												<span>CPF</span>
+											</div>
+										</th>
 
 										<!-- <th
 										scope="col"
@@ -95,7 +107,7 @@
 										class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-opacity-50"
 									>
 										<button class="flex items-center gap-x-2">
-											<span>Email</span>
+											<span>cpf</span>
 										</button>
 									</th>
 
@@ -135,11 +147,11 @@
 													</div>
 												</div>
 											</td>
-											<!-- <td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
-											>{cliente.cnpj}</td
+											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
+											>{representante.cpf}</td
 										>
-										<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
-											>{cliente.email}</td
+										<!-- <td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
+											>{cliente.cpf}</td
 										>
 										<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
 											>{cliente.endereco}</td
@@ -231,22 +243,13 @@
 				</label>
 
 				<label class="input input-bordered flex items-center gap-2">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 16 16"
-						fill="currentColor"
-						class="h-4 w-4 opacity-70"
-					>
-						<path
-							d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"
-						/>
-						<path
-							d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
-						/>
-					</svg>
-					<input type="text" class="grow" placeholder="Email" name="email" />
+					
+					<input type="text" class="grow" placeholder="CPF" name="cpf" />
 				</label>
 				<button class="btn btn-info" type="submit">Criar representante</button>
+				{#if form?.message}
+					<p class="text-error text-center mt-4">{form.message}</p>
+				{/if}
 			</div>
 		</form>
 
@@ -287,20 +290,8 @@
 				</label>
 
 				<label class="input input-bordered flex items-center gap-2">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 16 16"
-						fill="currentColor"
-						class="h-4 w-4 opacity-70"
-					>
-						<path
-							d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z"
-						/>
-						<path
-							d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"
-						/>
-					</svg>
-					<input type="text" class="grow" placeholder="Email" name="email"value={selectedRepresentante.email} />
+					
+					<input type="text" class="grow" placeholder="CPF" name="cpf"value={selectedRepresentante.cpf} />
 				</label>
 				<button class="btn btn-info" type="submit">Atualizar representante</button>
 			</div>

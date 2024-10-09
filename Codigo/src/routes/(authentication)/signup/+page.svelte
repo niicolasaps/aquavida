@@ -101,6 +101,12 @@
 
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
+							<input type="text" class="grow" placeholder="CPF" name="cpf" />
+						</label>
+					</div>
+
+					<div class="w-full mt-4">
+						<label class="input input-bordered flex items-center gap-2">
 							<input type="password" class="grow" name="password" />
 						</label>
 					</div>
@@ -136,6 +142,11 @@
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
 							<input type="password" class="grow" placeholder="Password" name="password" />
+						</label>
+					</div>
+					<div class="w-full mt-4">
+						<label class="input input-bordered flex items-center gap-2">
+							<input type="text" class="grow" placeholder="CNPJ" name="cpf" />
 						</label>
 					</div>
 					<div class="w-full mt-4 grid grid-cols-2 gap-2">

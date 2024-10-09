@@ -1,19 +1,25 @@
 import { clienteController, representanteController } from '$lib/server/db/controllers';
+import { fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
 export const load = (async () => {
 	const representantes = await representanteController.selectAllRepresentantes();
-	const clientes = await clienteController.selectAllClientes()
-	return { representantes,clientes };
+	const clientes = await clienteController.selectAllClientes();
+	return { representantes, clientes };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
 	create: async ({ request }) => {
 		const data = await request.formData();
 		const name = String(data.get('name'));
-		const email = String(data.get('email'))
+		const cpf = String(data.get('cpf'));
+		if (!cpf) {
+			return fail(400, {
+				message: 'Digite um CPF'
+			});
+		}
 
-		await representanteController.insertRepresentante({ name,email });
+		await representanteController.insertRepresentante({ name, cpf });
 	},
 	delete: async ({ request }) => {
 		const data = await request.formData();

@@ -99,11 +99,7 @@
 													<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
 
 													<div class="flex items-center gap-x-2">
-														<img
-															class="object-cover w-10 h-10 rounded-full"
-															src="https://as1.ftcdn.net/v2/jpg/03/46/83/96/1000_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-															alt="user"
-														/>
+														
 														<div>
 															<h2 class="font-medium">{servico.name}</h2>
 														</div>

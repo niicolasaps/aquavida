@@ -10,6 +10,7 @@
 	let pedidosPendentes = pedidos.filter(pedido => pedido.pedidos.status === 'pendente');
 	let pedidosAceitos = pedidos.filter(pedido => pedido.pedidos.status === 'aderido');
 	let pedidosRecusados = pedidos.filter(pedido => pedido.pedidos.status === 'recusado');
+	//TODO: solicitar varios pedidos e ter tabela de pedidos com botão
 </script>
 
 <main class="mt-5">

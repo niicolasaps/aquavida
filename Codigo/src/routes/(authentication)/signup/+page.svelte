@@ -37,7 +37,7 @@
 	}
 </script>
 
-<div class="min-h-[80vh] flex items-center justify-center">
+<div class="min-h-[90vh] flex items-center justify-center">
 	<div class="w-full max-w-sm mx-auto overflow-hidden bg-base-200 rounded-lg shadow-md">
 		<div class="px-6 py-4">
 			{#if isCliente || isRepresentante}

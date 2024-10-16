@@ -4,3 +4,5 @@ export * from './gerente'
 export * from './representante'
 export * from './servico'
 export * from './user'
+export * from './template'
+

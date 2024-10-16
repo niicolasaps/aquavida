@@ -2,21 +2,22 @@ import { relations } from 'drizzle-orm';
 import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { contratoTable } from '../contrato';
 import { pedidosClienteTable } from '../cliente';
+import { templateTable } from '../template';
 
 export const servicoTable = sqliteTable('servico', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
 	name: text('name').notNull(),
-	description: text('description').notNull()
+	description: text('description').notNull(),
 });
 
-export const servicoRelations = relations(servicoTable, ({ many }) => ({
+export const servicoRelations = relations(servicoTable, ({ many, one }) => ({
 	contrato: many(servicoToContratoTable),
-	pedidos: many(servicoToPedidoTable)
+	pedidos: many(servicoToPedidoTable),
 	// relatorio: many(relatorioTable),
-	// template: one(templateTable, {
-	// 	fields: [servicoTable.id],
-	// 	references: [templateTable.servico_id]
-	// })
+	template: one(templateTable, {
+		fields: [servicoTable.id],
+		references: [templateTable.servico_id]
+	})
 }));
 
 //TODO: Relation com relatorio e template

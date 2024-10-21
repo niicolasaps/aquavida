@@ -54,6 +54,13 @@ async function updatePedido(id: number, data: Partial<SelectPedido>) {
 	return db.update(pedidosClienteTable).set(data).where(eq(pedidosClienteTable.id, id));
 }
 
+async function associateRepresentanteToCliente(clienteId: number, representanteId: number) {
+    return db
+        .update(clienteTable)
+        .set({ representante_id: representanteId })
+        .where(eq(clienteTable.id, clienteId));
+}
+
 export const clienteController = {
 	insertCliente,
 	selectClienteById,
@@ -63,5 +70,6 @@ export const clienteController = {
 	insertPedido,
 	selectAllPedidos,
 	updatePedido,
-	getClienteByEmail
+	getClienteByEmail,
+	associateRepresentanteToCliente
 };

@@ -31,7 +31,8 @@ export const actions: Actions = {
 		const cnpj = String(data.get('cnpj'));
 		const email = String(data.get('email'))
 		const endereco = String(data.get('endereco'))
+		const representante_id = Number(data.get('representante_id'));
 
-		await clienteController.updateCliente(id, { name, cnpj,email,endereco });
+		await clienteController.updateCliente(id, { name, cnpj, email, endereco, representante_id });
 	}
 };

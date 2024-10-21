@@ -61,7 +61,12 @@
 		</div>
 
 		{#if clientes.length === 0}
-			<h1 class="text-xl text-center mt-16"> Nenhum cliente cadastrado <button class="underline text-primary" on:click={() => isOpenModal?.showModal()}>clique aqui</button> para criar um cliente </h1>
+			<h1 class="text-xl text-center mt-16">
+				Nenhum cliente cadastrado <button
+					class="underline text-primary"
+					on:click={() => isOpenModal?.showModal()}>clique aqui</button
+				> para criar um cliente
+			</h1>
 		{:else}
 			<div class="fle x flex-col mt-6">
 				<div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -143,9 +148,11 @@
 											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
 												>{cliente.endereco}</td
 											>
-											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
-												>{cliente.representante_id}</td
-											>
+											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
+												{#if representantes}
+													{representantes.find(rep => rep.id === cliente.representante_id)?.name || 'Sem representante'}
+												{/if}
+											</td>
 											<td class="px-4 py-4 text-sm whitespace-nowrap">
 												<div class="flex items-center gap-x-6">
 													<form method="POST" action="?/delete" class="m-0 p-0">
@@ -206,7 +213,10 @@
 <dialog id="my_modal_2" class="modal" bind:this={isOpenModal}>
 	<div class="modal-box">
 		<h3 class="text-lg font-bold">Criar um cliente</h3>
-		<button on:click={() => isOpenModal?.close()} class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button>
+		<button
+			on:click={() => isOpenModal?.close()}
+			class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button
+		>
 		<!-- <ClienteModal /> -->
 
 		<form method="POST" action="?/create">
@@ -331,6 +341,13 @@
 						value={selectedCliente.endereco}
 					/>
 				</label>
+				<!-- Select para atualizar representante -->
+				<select class="select select-bordered w-full" name="representante_id" bind:value={selectedCliente.representante_id}>
+					<option disabled selected>Selecione o representante</option>
+					{#each representantes as representante}
+						<option value={representante.id}>{representante.name}</option>
+					{/each}
+				</select>
 				<button class="btn btn-info" type="submit">Atualizar cliente</button>
 			</div>
 		</form>

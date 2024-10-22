@@ -108,6 +108,24 @@
 							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Pedidos</a
 						>
 					</li>
+					<li>
+						<a
+							href="/representantes/clientes"
+							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Clientes/repre</a
+						>
+					</li>
+					<li>
+						<a
+							href="/customer/servicos"
+							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">customer/serv</a
+						>
+					</li>
+					<li>
+						<a
+							href="/admin/template"
+							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">template</a
+						>
+					</li>
 				{/if}
 			</ul>
 		</div>

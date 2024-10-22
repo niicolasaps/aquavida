@@ -34,19 +34,21 @@ async function deleteRepresentante(id: number) {
 }
 
 async function selectClientesByRepresentante(id:string) {
-	const user = await userController.getUserSession(id);
-	const representante = await selectRepresentanteByUserMail(user[0].email);
-	if(!representante){
-		return
-	}
-	const clientes = await selectClientesByRepresentanteId(representante[0].id);
-	return clientes;
+    const user = await userController.getUserSession(id);
+
+    const representante = await selectRepresentanteByUserMail(user[0].email);
+    if (!representante || representante.length === 0) {
+        console.error('Nenhum representante');
+        throw new Error('Nenhum representante');
+    }
+
+    const clientes = await selectClientesByRepresentanteId(representante[0].id);
+    return clientes;
 }
 
 async function selectRepresentanteByUserMail(email:string) {
 	return db.select().from(representanteTable).where(eq(representanteTable.email,email));
 }
-
 async function selectClientesByRepresentanteId(id:number){
 	return db.select().from(clienteTable).where(eq(clienteTable.representante_id,id));
 }
@@ -58,5 +60,6 @@ export const representanteController = {
 	updateRepresentante,
 	deleteRepresentante,
 	getRepresentanteByCPF,
-	selectClientesByRepresentante
+	selectClientesByRepresentante,
+	selectRepresentanteByUserMail
 };

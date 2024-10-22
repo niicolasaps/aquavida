@@ -8,6 +8,9 @@ async function insertUser(data: InsertUser) {
 	return db.insert(userTable).values(data).run()
 }
 
+async function updateUser(id: string, data: Partial<SelectUser>) {
+	return db.update(userTable).set(data).where(eq(userTable.id, id));
+}
 async function selectAllUsers() {
 	return db.select().from(userTable);
 }
@@ -28,5 +31,6 @@ export const userController = {
 	selectAllUsers,
 	getUserByEmail,
 	getSessions,
-	getUserSession
+	getUserSession,
+	updateUser
 };

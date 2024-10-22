@@ -31,7 +31,7 @@
 		<p class="text-opacity-60">{$user?.email}</p>
 	</div>
 	<div class="mx-2 p-4 border-t border-base-300 mt-2 flex gap-2 justify-center">
-    <form method="post" use:enhance>
+    <form method="post" use:enhance  action="?/logout">
       <button class="btn btn-secondary">Logout</button>
     </form>
 		<button class="btn btn-primary" on:click={() => isOpenModal?.showModal()}>Editar informações</button>

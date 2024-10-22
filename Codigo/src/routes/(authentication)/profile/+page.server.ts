@@ -2,13 +2,14 @@ import { lucia } from '$lib/server/auth';
 import { fail, redirect } from '@sveltejs/kit';
 
 import type { Actions, PageServerLoad } from './$types';
+import { clienteController, representanteController, userController } from '$lib/server/db/controllers';
 
 export const load = (async () => {
 	return {};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-	default: async (event) => {
+	logout: async (event) => {
 		if (!event.locals.session) {
 			return fail(401);
 		}
@@ -19,5 +20,36 @@ export const actions: Actions = {
 			...sessionCookie.attributes
 		});
 		redirect(302, '/login');
-	}
+	},
+	update: async (event) => {
+        if (!event.locals.session) {
+            return fail(401);
+        }
+
+		
+        const formData = await event.request.formData();
+        const userId = event.locals.session.userId;
+        const updatedData = {
+			username: String(formData.get('name')),
+            email: String(formData.get('cnpj'))
+        };
+
+		const user = await userController.getUserSession(userId)
+		const cliente = await clienteController.getClienteByEmail(user[0].email)
+		const representante = await representanteController.selectRepresentanteByUserMail(user[0].email)
+
+		if(user[0].tipo === 'cliente') {
+			await clienteController.updateCliente(cliente.id,updatedData)
+		}
+		if(user[0].tipo === 'representante') {
+			await representanteController.updateRepresentante(representante[0].id,updatedData)
+		}
+		
+        await userController.updateUser(userId, updatedData);
+
+        return {
+            success: true,
+            message: "Profile updated successfully!"
+        };
+    }
 };

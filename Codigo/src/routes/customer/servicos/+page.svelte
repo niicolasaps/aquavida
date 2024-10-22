@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 
-	export let page: PageData;
-    let servicos = page.servicos
+	export let data: PageData;
+    let servicos = data.servicos
 </script>
 
 <div class="container mx-auto py-8">

@@ -2,6 +2,10 @@ import { db } from '$lib/server/db';
 import { representanteTable } from '$lib/server/db/schema/representante';
 import type { InsertRepresentante, SelectRepresentante } from '$lib/server/db/schema/representante';
 import { eq } from 'drizzle-orm';
+import { sessionTable, userTable } from '../user';
+import { fromJSON } from 'postcss';
+import { clienteTable } from '../cliente';
+import { userController } from '../user/controller';
 
 async function insertRepresentante(data: InsertRepresentante) {
 	return db.insert(representanteTable).values(data);
@@ -29,11 +33,30 @@ async function deleteRepresentante(id: number) {
 	return db.delete(representanteTable).where(eq(representanteTable.id, id));
 }
 
+async function selectClientesByRepresentante(id:string) {
+	const user = await userController.getUserSession(id);
+	const representante = await selectRepresentanteByUserMail(user[0].email);
+	if(!representante){
+		return
+	}
+	const clientes = await selectClientesByRepresentanteId(representante[0].id);
+	return clientes;
+}
+
+async function selectRepresentanteByUserMail(email:string) {
+	return db.select().from(representanteTable).where(eq(representanteTable.email,email));
+}
+
+async function selectClientesByRepresentanteId(id:number){
+	return db.select().from(clienteTable).where(eq(clienteTable.representante_id,id));
+}
+
 export const representanteController = {
 	insertRepresentante,
 	selectRepresentanteById,
 	selectAllRepresentantes,
 	updateRepresentante,
 	deleteRepresentante,
-	getRepresentanteByCPF
+	getRepresentanteByCPF,
+	selectClientesByRepresentante
 };

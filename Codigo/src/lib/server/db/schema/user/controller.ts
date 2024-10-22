@@ -17,11 +17,16 @@ async function getUserByEmail(email: string) {
 }
 async function getSessions (userId: SelectUser['id']) {
     return db.select().from(sessionTable).where(eq(sessionTable.userId, userId))
-  }
+}
+
+async function getUserSession (userId: SelectUser['id']) {
+    return db.select().from(userTable).where(eq(userTable.id, userId))
+}
 
 export const userController = {
 	insertUser,
 	selectAllUsers,
 	getUserByEmail,
-	getSessions
+	getSessions,
+	getUserSession
 };

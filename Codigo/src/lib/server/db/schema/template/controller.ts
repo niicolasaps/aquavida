@@ -23,7 +23,7 @@ async function deleteTemplate(id: number) {
 	return db.delete(templateTable).where(eq(templateTable.servico_id, id));
 }
 async function getTemplateByServicoId(servicoId:number){
-	return db.select().from(templateTable).where(eq(templateTable.servico_id,servicoId)).limit(1)
+	return db.select().from(templateTable).where(eq(templateTable.servico_id,servicoId))
 }
 
 export const TemplateController = {

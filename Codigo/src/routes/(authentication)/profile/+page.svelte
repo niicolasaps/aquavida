@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { getUserContext } from '$lib/stores/user';
-  import { enhance } from '$app/forms';
+	import { enhance } from '$app/forms';
+	import type { PageData } from './$types';
 
 	const user = getUserContext();
+
+	export let data: PageData;
 
 	let isOpenModal: HTMLDialogElement | null = null;
 </script>
@@ -29,12 +32,23 @@
 	<div class="text-center mt-2">
 		<h2 class="font-semibold">{$user?.username}</h2>
 		<p class="text-opacity-60">{$user?.email}</p>
+		{#if data.cliente}
+			{#if !data.cliente[0].representante}
+				Representante ainda não cadastrado
+			{:else}
+				Representante: <p class="text-opacity-60">{data.cliente[0].representante?.name}</p>
+				Email do representante:
+				<p class="text-opacity-60">{data.cliente[0].representante?.email ?? 'Ainda não cadastrou'}</p>
+			{/if}
+		{/if}
 	</div>
 	<div class="mx-2 p-4 border-t border-base-300 mt-2 flex gap-2 justify-center">
-    <form method="post" use:enhance  action="?/logout">
-      <button class="btn btn-secondary">Logout</button>
-    </form>
-		<button class="btn btn-primary" on:click={() => isOpenModal?.showModal()}>Editar informações</button>
+		<form method="post" use:enhance action="?/logout">
+			<button class="btn btn-secondary">Logout</button>
+		</form>
+		<button class="btn btn-primary" on:click={() => isOpenModal?.showModal()}
+			>Editar informações</button
+		>
 	</div>
 </div>
 

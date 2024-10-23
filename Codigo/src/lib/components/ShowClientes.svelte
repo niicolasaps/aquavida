@@ -1,12 +1,8 @@
 <script lang="ts">
-	import ShowClientes from '$lib/components/ShowClientes.svelte';
-import type { PageData } from './$types';
-
-	export let data: PageData;
-	const clientes = data.clientes;
+export let clientes
 </script>
 
-<!-- {#if clientes}
+{#if clientes}
 	<h1 class="text-center text-2xl my-3">Seus clientes:</h1>
 	<main class="mt-5">
 		<section class="container px-4 mx-auto">
@@ -35,7 +31,7 @@ import type { PageData } from './$types';
 												class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-opacity-50"
 											>
 												<div class="flex items-center gap-x-3">
-													
+													<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
 													<span>Nome</span>
 												</div>
 											</th>
@@ -70,7 +66,7 @@ import type { PageData } from './$types';
 											<tr>
 												<td class="px-4 py-4 text-sm font-medium text-opacity-70 whitespace-nowrap">
 													<div class="inline-flex items-center gap-x-3">
-													
+														<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
 
 														<div class="flex items-center gap-x-2">
 															<img
@@ -106,6 +102,4 @@ import type { PageData } from './$types';
 	</main>
 {:else}
 	<h1 class="text-center mt-40 text-2xl">Você não é representante para acessar essa rota!</h1>
-{/if} -->
-
-<ShowClientes {clientes}/>
+{/if}

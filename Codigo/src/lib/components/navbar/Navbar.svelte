@@ -75,57 +75,43 @@
 				class="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg bg-base-100 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-base-200"
 			>
 				<li>
-					<a href="/" class="block py-2 px-3 rounded md:bg-transparent md:p-0" aria-current="page"
-						>Página inicial</a
-					>
+					<a href="/" class="btn m-1" aria-current="page">Página inicial</a>
 				</li>
 				{#if $user}
 					<li>
-						<a href="/admin/clientes" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
-							>Clientes</a
-						>
+						<a href="/customer/servicos" class="btn m-1">Todos servicos</a>
 					</li>
-					<li>
-						<a
-							href="/admin/representantes"
-							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Representantes</a
+					<div class="dropdown">
+						<div tabindex="0" role="button" class="btn m-1">Admin</div>
+						<ul
+							tabindex="0"
+							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 						>
-					</li>
-					<li>
-						<a href="/admin/servicos" class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0"
-							>Serviços</a
+							<li><a href="/admin/clientes">Clientes</a></li>
+							<li><a href="/admin/representantes">Representantes</a></li>
+							<li><a href="/admin/servicos">Serviços</a></li>
+							<li><a href="/admin/pedidos">Pedidos</a></li>
+							<li><a href="/admin/template">Criar templates</a></li>
+						</ul>
+					</div>
+					<div class="dropdown">
+						<div tabindex="0" role="button" class="btn m-1">Cliente</div>
+						<ul
+							tabindex="0"
+							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 						>
-					</li>
-					<li>
-						<a
-							href="/customer/solicitar"
-							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Solicitar servico</a
+							<li><a href="/customer/solicitar">Solicitar serviço</a></li>
+						</ul>
+					</div>
+					<div class="dropdown">
+						<div tabindex="0" role="button" class="btn m-1">Representante</div>
+						<ul
+							tabindex="0"
+							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 						>
-					</li>
-					<li>
-						<a
-							href="/admin/pedidos"
-							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Pedidos</a
-						>
-					</li>
-					<li>
-						<a
-							href="/representantes/clientes"
-							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">Clientes/repre</a
-						>
-					</li>
-					<li>
-						<a
-							href="/customer/servicos"
-							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">customer/serv</a
-						>
-					</li>
-					<li>
-						<a
-							href="/admin/template"
-							class="block py-2 px-3 rounded md:hover:bg-transparent md:p-0">template</a
-						>
-					</li>
+							<li><a href="/representantes/clientes">Seus clientes</a></li>
+						</ul>
+					</div>
 				{/if}
 			</ul>
 		</div>

@@ -4,8 +4,23 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { clienteController, representanteController, userController } from '$lib/server/db/controllers';
 
-export const load = (async () => {
-	return {};
+export const load = (async ({locals}) => {
+	const user = locals.user
+	if (!locals.session) {
+		return fail(401);
+	}
+
+	if(!user){
+		return fail(401);
+	}
+	const cli = await clienteController.getClienteByEmail(user?.email)
+	if(cli){
+		const cliente = await clienteController.selectClienteById(cli.id)
+		console.log(cliente)
+		return {cliente};
+	} else{
+		return {}
+	}
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

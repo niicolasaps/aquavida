@@ -8,12 +8,13 @@ import type {
 } from '$lib/server/db/schema/cliente';
 import { eq } from 'drizzle-orm';
 import { servicoTable } from '../servico';
+import { representanteTable } from '../representante';
 
 async function insertCliente(data: InsertCliente) {
 	return db.insert(clienteTable).values(data);
 }
 async function selectClienteById(id: number) {
-	return db.select().from(clienteTable).where(eq(clienteTable.id, id));
+	return db.select().from(clienteTable).leftJoin(representanteTable,eq(representanteTable.id,clienteTable.representante_id)).where(eq(clienteTable.id, id));
 }
 
 async function getClienteByEmail(email: string) {

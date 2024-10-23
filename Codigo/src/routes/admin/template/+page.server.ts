@@ -16,12 +16,13 @@ export const actions: Actions = {
 		const servicoId = Number(data.get('servico_id'))
 		const description = String(data.get('description'));
 
-		const [existingTemplate] = await TemplateController.getTemplateByServicoId(servicoId);
-		if (!existingTemplate) {
-			return fail(400, {
-				message: 'Já existe um template desse serviço ou nenhum selecionado'
-			});
-		}
+		// const [existingTemplate] = await TemplateController.getTemplateByServicoId(servicoId);
+		// console.log(existingTemplate)
+		// if (!existingTemplate) {
+		// 	return fail(400, {
+		// 		message: 'Já existe um template desse serviço ou nenhum selecionado'
+		// 	});
+		// }
 		if(!description){
 			return fail(400, {
 				message: 'É obrigatorio descrição'

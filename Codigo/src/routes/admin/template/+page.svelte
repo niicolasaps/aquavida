@@ -128,7 +128,7 @@
 						selectedTemplate.descricao = selectedTemplate.descricao?.concat(simbolo);
 					}}>Adicionar espaço para variavel</button
 				>
-				<button class="btn btn-info" type="submit">Atualizar cliente</button>
+				<button class="btn btn-info" type="submit">Atualizar template</button>
 			</div>
 		</form>
 

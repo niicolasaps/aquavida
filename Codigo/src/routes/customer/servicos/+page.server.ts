@@ -3,6 +3,5 @@ import type { PageServerLoad } from "./$types";
 
 export const load = (async () => {
 	const servicos = await servicoController.selectAllServicos();
-	const representantes = await representanteController.selectAllRepresentantes();
-	return { servicos,representantes };
+	return { servicos };
 }) satisfies PageServerLoad;

@@ -6,10 +6,13 @@ import { servicoToContratoTable } from '../servico';
 
 export const contratoTable = sqliteTable('contrato', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-	date_emission: text('date_emission').default(sql`(CURRENT_TIMESTAMP)`),
-	date_expire: text('date_expire').notNull(),
+	date_emission: integer('date_emission',{mode:"timestamp"}).default(sql`(CURRENT_TIMESTAMP)`),
+	date_expire: integer('date_expire',{mode:"timestamp"}).notNull(),
+	updated_at:integer('updated_at',{mode:"timestamp"}).default(sql`(CURRENT_TIMESTAMP)`),
 	cliente_id: integer('cliente_id').references(() => clienteTable.id),
 	representante_id: integer('representante_id').references(() => representanteTable.id),
+	descricao: text('descricao'),
+	nome:text('nome'),
 	// servico_id: integer('servico_id').references(() => servicoTable.id)
 });
 

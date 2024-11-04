@@ -101,6 +101,7 @@
 							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 						>
 							<li><a href="/customer/solicitar">Solicitar serviço</a></li>
+							<li><a href="/customer/contratos">Visualizar contratos</a></li>
 						</ul>
 					</div>
 					<div class="dropdown">

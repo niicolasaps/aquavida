@@ -24,6 +24,9 @@ async function getRepresentanteByCPF(cpf: string) {
 	return representantes.length > 0 ? representantes[0] : null;
 }
 
+async function getRepresentanteByEmail(email: string) {
+	return db.select().from(representanteTable).where(eq(representanteTable.email, email)).limit(1);
+}
 
 async function updateRepresentante(id: number, data: Partial<SelectRepresentante>) {
 	return db.update(representanteTable).set(data).where(eq(representanteTable.id, id));
@@ -60,6 +63,7 @@ export const representanteController = {
 	updateRepresentante,
 	deleteRepresentante,
 	getRepresentanteByCPF,
+	getRepresentanteByEmail,
 	selectClientesByRepresentante,
 	selectRepresentanteByUserMail
 };

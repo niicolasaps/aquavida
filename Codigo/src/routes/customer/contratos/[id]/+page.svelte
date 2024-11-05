@@ -1,15 +1,11 @@
 <script lang="ts">
     import type { PageData } from '../$types';
-    import { getUserContext } from '$lib/stores/user';
-
-    const user = getUserContext();
 
     export let data: PageData;
-
     let contratos = data.contratos;
 </script>
 
-<h1 class="text-center mt-4 text-2xl font-semibold">Meus Contratos</h1>
+<h1 class="text-center mt-4 text-2xl font-semibold">Contratos do Cliente</h1>
 <div class="flex flex-col items-center max-w-2xl mx-auto mt-5">
     {#if contratos.length > 0}
         <ul class="w-full">

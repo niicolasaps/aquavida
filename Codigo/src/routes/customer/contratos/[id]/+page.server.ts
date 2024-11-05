@@ -2,20 +2,14 @@ import { contratoController, clienteController } from '$lib/server/db/controller
 import type { PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 
-export const load = (async (event) => {
-    const user = await event.locals.user;
+export const load = (async ({params}) => {
+    const clienteId = params.id;
 
-    if (!user) {
-        return fail(401, { message: 'Usuário não autenticado.' });
+    if (!clienteId) {
+        return fail(400, { message: 'ID do cliente não fornecido.' });
     }
 
-    const cliente = await clienteController.getClienteByEmail(user.email);
-    if (!cliente) {
-        return fail(404, { message: 'Cliente não encontrado.' });
-    }
-
-    const contratos = await contratoController.selectAllContratos()
-        .then(contratos => contratos.filter(contrato => contrato.cliente_id === cliente.id));
-
+    const contratos = await contratoController.selectContratoByClienteId(clienteId);
+    
     return { contratos };
 }) satisfies PageServerLoad;

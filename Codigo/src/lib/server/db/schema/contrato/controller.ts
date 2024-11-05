@@ -11,6 +11,10 @@ async function selectContratoById(id: number) {
 	return db.select().from(contratoTable).where(eq(contratoTable.id, id));
 }
 
+async function selectContratoByClienteId(id: number) {
+	return db.select().from(contratoTable).where(eq(contratoTable.cliente_id, id));
+}
+
 async function selectAllContratos() {
 	return db.select().from(contratoTable);
 }
@@ -27,5 +31,6 @@ export const contratoController = {
     selectContratoById,
     selectAllContratos,
     updateContrato,
-    deleteContrato
+    deleteContrato,
+    selectContratoByClienteId
 };

@@ -150,7 +150,8 @@
 											>
 											<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap">
 												{#if representantes}
-													{representantes.find(rep => rep.id === cliente.representante_id)?.name || 'Sem representante'}
+													{representantes.find((rep) => rep.id === cliente.representante_id)
+														?.name || 'Sem representante'}
 												{/if}
 											</td>
 											<td class="px-4 py-4 text-sm whitespace-nowrap">
@@ -197,26 +198,26 @@
 														</svg>
 													</button>
 
-													<button
-													on:click={() => window.location.href = `/cliente/contrato/${cliente.id}`}
-													class="text-opacity-50 transition-colors duration-200 hover:text-primary focus:outline-none mb-2"
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														fill="none"
-														viewBox="0 0 24 24"
-														stroke-width="1.5"
-														stroke="currentColor"
-														class="w-5 h-5"
+													<a
+														class="text-opacity-50 transition-colors duration-200 hover:text-primary focus:outline-none mb-2"
+														href="/customer/contratos/{cliente.id}"
 													>
-														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															d="M3 8.25V6.75A2.25 2.25 0 015.25 4.5h8.5A2.25 2.25 0 0116 6.75v8.5a2.25 2.25 0 01-2.25 2.25h-8.5A2.25 2.25 0 013 15.25v-1.5M9 13.5l6-6M15 9.5H12.5A2.25 2.25 0 0110.25 11.5V14"
-														/>
-													</svg>
-												</button>
 
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															fill="none"
+															viewBox="0 0 24 24"
+															stroke-width="1.5"
+															stroke="currentColor"
+															class="w-5 h-5"
+														>
+															<path
+																stroke-linecap="round"
+																stroke-linejoin="round"
+																d="M3 8.25V6.75A2.25 2.25 0 015.25 4.5h8.5A2.25 2.25 0 0116 6.75v8.5a2.25 2.25 0 01-2.25 2.25h-8.5A2.25 2.25 0 013 15.25v-1.5M9 13.5l6-6M15 9.5H12.5A2.25 2.25 0 0110.25 11.5V14"
+															/>
+														</svg>
+													</a>
 												</div>
 											</td>
 										</tr>
@@ -363,7 +364,11 @@
 					/>
 				</label>
 				<!-- Select para atualizar representante -->
-				<select class="select select-bordered w-full" name="representante_id" bind:value={selectedCliente.representante_id}>
+				<select
+					class="select select-bordered w-full"
+					name="representante_id"
+					bind:value={selectedCliente.representante_id}
+				>
 					<option disabled selected>Selecione o representante</option>
 					{#each representantes as representante}
 						<option value={representante.id}>{representante.name}</option>

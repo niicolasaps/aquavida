@@ -62,6 +62,11 @@ async function associateRepresentanteToCliente(clienteId: number, representanteI
         .where(eq(clienteTable.id, clienteId));
 }
 
+async function getClienteById(id: number) {
+	const cliente = await selectClienteById(id);
+	return cliente[0] || null;
+}
+
 export const clienteController = {
 	insertCliente,
 	selectClienteById,
@@ -72,5 +77,6 @@ export const clienteController = {
 	selectAllPedidos,
 	updatePedido,
 	getClienteByEmail,
-	associateRepresentanteToCliente
+	associateRepresentanteToCliente,
+	getClienteById
 };

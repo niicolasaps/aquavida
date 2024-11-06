@@ -92,6 +92,7 @@
 							<li><a href="/admin/servicos">Serviços</a></li>
 							<li><a href="/admin/pedidos">Pedidos</a></li>
 							<li><a href="/admin/template">Criar templates</a></li>
+							<li><a href="/admin/acompanhamento">Acompanhamento</a></li>
 						</ul>
 					</div>
 					<div class="dropdown">

@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 
 export const load = (async ({params}) => {
-    const clienteId = params.id;
+    const clienteId = Number(params.id)
 
     if (!clienteId) {
         return fail(400, { message: 'ID do cliente não fornecido.' });
@@ -11,5 +11,5 @@ export const load = (async ({params}) => {
 
     const contratos = await contratoController.selectContratoByClienteId(clienteId);
     
-    return { contratos };
+    return { contratos: contratos || [] };
 }) satisfies PageServerLoad;

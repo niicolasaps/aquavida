@@ -14,7 +14,7 @@ export const representanteTable = sqliteTable('representante', {
 
 export const representanteRelations = relations(representanteTable, ({ one, many }) => ({
 	cliente: many(clienteTable),
-	contratoTable: many(contratoTable),
+	// contratoTable: many(contratoTable),
 	gerente: one(gerenteTable, {
 		fields: [representanteTable.gerente_id],
 		references: [gerenteTable.id]

@@ -92,7 +92,7 @@
 							<li><a href="/admin/servicos">Serviços</a></li>
 							<li><a href="/admin/pedidos">Pedidos</a></li>
 							<li><a href="/admin/template">Criar templates</a></li>
-							<li><a href="/admin/acompanhamento">Acompanhamento</a></li>
+							<li><a href="/admin/contratos">Contratos</a></li>
 						</ul>
 					</div>
 					<div class="dropdown">
@@ -102,7 +102,7 @@
 							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 						>
 							<li><a href="/customer/solicitar">Solicitar serviço</a></li>
-							<li><a href="/customer/contratos">Visualizar contratos</a></li>
+							<li><a href="/customer/contratos/1">Visualizar contratos</a></li>
 						</ul>
 					</div>
 					<div class="dropdown">

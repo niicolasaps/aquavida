@@ -14,15 +14,12 @@ export const clienteTable = sqliteTable('cliente', {
 	representante_id: integer('representante_id').references(() => representanteTable.id)
 });
 
-export const clienteRelations = relations(clienteTable, ({ one }) => ({
+export const clienteRelations = relations(clienteTable, ({ one,many }) => ({
 	representante: one(representanteTable, {
 		fields: [clienteTable.representante_id],
 		references: [representanteTable.id]
 	}),
-	contrato: one(contratoTable, {
-		fields: [clienteTable.id],
-		references: [contratoTable.cliente_id]
-	})
+	contrato: many(contratoTable)
 }));
 
 export type SelectCliente = typeof clienteTable.$inferSelect;

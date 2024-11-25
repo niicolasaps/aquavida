@@ -3,6 +3,7 @@ import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { clienteTable } from '../cliente';
 import { representanteTable } from '../representante';
 import { servicoToContratoTable } from '../servico';
+import { servicoContratoToContratoTable } from '../servicoContrato';
 
 export const contratoTable = sqliteTable('contrato', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
@@ -25,7 +26,8 @@ export const contratoRelations = relations(contratoTable, ({ one, many }) => ({
 	// 	fields: [contratoTable.representante_id],
 	// 	references: [representanteTable.id]
 	// }),
-	servico: many(servicoToContratoTable)
+	servico: many(servicoToContratoTable),
+	servicoContrato: many(servicoContratoToContratoTable)
 }));
 
 export type SelectContrato = typeof contratoTable.$inferSelect;

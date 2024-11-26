@@ -3,7 +3,6 @@ import { text, integer, sqliteTable } from 'drizzle-orm/sqlite-core';
 import { clienteTable } from '../cliente';
 import { representanteTable } from '../representante';
 import { servicoToContratoTable } from '../servico';
-import { servicoContratoToContratoTable } from '../servicoContrato';
 import { relatorioTable } from '../relatorio';
 
 export const contratoTable = sqliteTable('contrato', {
@@ -29,7 +28,6 @@ export const contratoRelations = relations(contratoTable, ({ one, many }) => ({
 	// 	references: [representanteTable.id]
 	// }),
 	servico: many(servicoToContratoTable),
-	servicoContrato: many(servicoContratoToContratoTable)
 }));
 
 export type SelectContrato = typeof contratoTable.$inferSelect;

@@ -4,6 +4,7 @@ import { clienteTable } from '../cliente';
 import { representanteTable } from '../representante';
 import { servicoToContratoTable } from '../servico';
 import { servicoContratoToContratoTable } from '../servicoContrato';
+import { relatorioTable } from '../relatorio';
 
 export const contratoTable = sqliteTable('contrato', {
 	id: integer('id').notNull().primaryKey({ autoIncrement: true }),
@@ -22,6 +23,7 @@ export const contratoRelations = relations(contratoTable, ({ one, many }) => ({
 		fields: [contratoTable.cliente_id],
 		references: [clienteTable.id]
 	}),
+	relatorio: many(relatorioTable),
 	// representate: one(representanteTable, {
 	// 	fields: [contratoTable.representante_id],
 	// 	references: [representanteTable.id]

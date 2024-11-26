@@ -28,7 +28,10 @@ export const servicoToContratoTable = sqliteTable('servico_to_contrato', {
 		.references(() => servicoTable.id),
 	contrato_id: integer('contrato_id')
 		.notNull()
-		.references(() => contratoTable.id)
+		.references(() => contratoTable.id),
+		
+	status: text('status', { enum: ['Em Andamento', 'Concluido', 'Não Iniciado', 'Pendente', 'Recusado'] }),
+
 });
 
 export const servicoToContratoRelations = relations(servicoToContratoTable, ({ one }) => ({

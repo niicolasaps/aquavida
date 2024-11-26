@@ -9,6 +9,7 @@ export const relatorioTable = sqliteTable('relatorio', {
     // status: text('status').notNull(),
     // InclusaoServico: integer('InclusaoServico').notNull(),
     descricao: text('descricao'),
+    nome: text('nome'),
     // servico_ID: integer('servico_ID').references(() => servicoTable.id),
     // representante_ID: integer('representante_ID').references(() => representanteTable.id),
     contrato_id: integer('contrato_id').references(() => contratoTable.id),

@@ -103,6 +103,7 @@
 						>
 							<li><a href="/customer/solicitar">Solicitar serviço</a></li>
 							<li><a href="/customer/contratos/1">Visualizar contratos</a></li>
+							<li><a href="/customer/relatorio">Visualizar relatório</a></li>
 						</ul>
 					</div>
 					<div class="dropdown">

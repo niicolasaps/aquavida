@@ -63,10 +63,10 @@
 
 			<div>
 				<h2 class="text-xl font-semibold mb-4">Relatorios</h2>
-				<div class="bg-base-200 rounded-lg p-4 space-y-2">
+				<div class="bg-base-200 rounded-lg p-6 space-y-2">
 					{#if contrato.relatorio.length>0}
 					{#each contrato.relatorio as relatorio}
-					<div class="flex justify-between items-center  p-3 rounded">
+					<div class="flex justify-between items-center rounded">
 						<h1>Relatorio: {relatorio.id} - {relatorio.nome}</h1>
 						<a href="/customer/relatorio/{relatorio.id}" class="btn btn-sm btn-primary">Visualizar</a>
 					</div>
@@ -74,6 +74,10 @@
 					{:else}
 					Não possui
 					{/if}
+					<!-- <div class="flex justify-between items-center rounded">
+						<h1>Novo relatorio</h1>
+						<a href="/customer/relatorio/" class="btn btn-sm btn-secondary">Criar</a>
+					</div> -->
 				</div>
 			</div>
 

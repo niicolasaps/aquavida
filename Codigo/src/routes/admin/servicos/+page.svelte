@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import Alert from '$lib/components/Alert.svelte';
 	import type { SelectServico } from '$lib/server/db/schema';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+	export let form;
 
 	let servicos = data.servicos;
 	let isOpenModal: HTMLDialogElement | null = null;
@@ -61,6 +63,7 @@
 				> para criar
 			</h1>
 		{:else}
+			<Alert message={form?.message} success={form?.success}/>
 			<div class="fle x flex-col mt-6">
 				<div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 					<div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -99,7 +102,6 @@
 													<!-- <input type="checkbox" class="text-info-content border-base-300 rounded" /> -->
 
 													<div class="flex items-center gap-x-2">
-														
 														<div>
 															<h2 class="font-medium">{servico.name}</h2>
 														</div>
@@ -113,6 +115,7 @@
 												<div class="flex items-center gap-x-6">
 													<form method="POST" action="?/delete" class="m-0 p-0">
 														<input type="hidden" name="id" value={servico.id} />
+														<!-- svelte-ignore a11y_consider_explicit_label -->
 														<button
 															class="text-opacity-50 transition-colors duration-200 hover:text-error focus:outline-none"
 														>
@@ -133,6 +136,7 @@
 														</button>
 													</form>
 
+													<!-- svelte-ignore a11y_consider_explicit_label -->
 													<button
 														on:click={() => openEditModal(servico)}
 														class="text-opacity-50 transition-colors duration-200 hover:text-primary focus:outline-none mb-2"
@@ -169,7 +173,10 @@
 <dialog id="my_modal_2" class="modal" bind:this={isOpenModal}>
 	<div class="modal-box">
 		<h3 class="text-lg font-bold">Criar um Serviço</h3>
-		<button on:click={() => isOpenModal?.close()} class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button>
+		<button
+			on:click={() => isOpenModal?.close()}
+			class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button
+		>
 		<!-- <servicosModal /> -->
 
 		<form method="POST" action="?/create">

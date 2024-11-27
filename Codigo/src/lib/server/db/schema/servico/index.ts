@@ -22,6 +22,9 @@ export const servicoRelations = relations(servicoTable, ({ many, one }) => ({
 
 //TODO: Relation com relatorio e template
 
+export const enumStatusServico = ['Em Andamento', 'Concluido', 'Não Iniciado', 'Pendente', 'Recusado'] as const
+
+export type StatusType = "Em Andamento" | "Concluido" | "Não Iniciado" | "Pendente" | "Recusado";
 export const servicoToContratoTable = sqliteTable('servico_to_contrato', {
 	servico_id: integer('servico_id')
 		.notNull()
@@ -30,10 +33,9 @@ export const servicoToContratoTable = sqliteTable('servico_to_contrato', {
 		.notNull()
 		.references(() => contratoTable.id),
 		
-	status: text('status', { enum: ['Em Andamento', 'Concluido', 'Não Iniciado', 'Pendente', 'Recusado'] }),
+	status: text('status', { enum: enumStatusServico }),
 
 });
-
 export const servicoToContratoRelations = relations(servicoToContratoTable, ({ one }) => ({
 	servico: one(servicoTable, {
 		fields: [servicoToContratoTable.servico_id],

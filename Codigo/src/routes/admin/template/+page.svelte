@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Alert from '$lib/components/Alert.svelte';
 	import type { SelectTemplate } from '$lib/server/db/schema';
 	import type { PageData } from './$types';
 
@@ -35,7 +36,7 @@
 
 <main class="container mx-auto">
 
-	
+	<Alert message={form?.message} success={form?.success}/>
 	<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
 		{#each templates as template}
 		<div class="card bg-base-100 image-full md:max-w-96 w-full shadow-xl">
@@ -61,9 +62,9 @@
 			{/each}
 			<button on:click={() => isOpenModal?.showModal()} class="btn btn-primary h-full">Novo template<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
 	</div>
-	{#if form?.message}
+	<!-- {#if form?.message}
 					<p class="text-error text-center mt-4">{form.message}</p>
-				{/if}
+				{/if} -->
 </main>
 
 <dialog id="my_modal_2" class="modal" bind:this={isOpenModal}>
@@ -94,9 +95,9 @@
 					>
 					<button class="btn btn-info" type="submit">criar</button>
 				</div>
-				{#if form?.message}
+				<!-- {#if form?.message}
 					<p class="text-error text-center mt-4">{form.message}</p>
-				{/if}
+				{/if} -->
 			</form>
 
 		<!-- <div class="modal-action">

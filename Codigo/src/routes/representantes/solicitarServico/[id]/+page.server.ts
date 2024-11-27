@@ -1,12 +1,16 @@
-import { clienteController, servicoController } from '$lib/server/db/controllers';
+import { clienteController, relatorioController, servicoController } from '$lib/server/db/controllers';
 import type { Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 import { lucia } from '$lib/server/auth';
 
-export const load = (async () => {
+export const load = (async ({params}) => {
+	const id = Number(params.id)
+        
+	const relatorios = await relatorioController.selectRelatorioById(id);
+   
 	const servicos = await servicoController.selectAllServicos();
-	return { servicos };
+	return { servicos ,relatorios};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
@@ -41,5 +45,31 @@ export const actions: Actions = {
 			servico_id: servico_id,
 			cliente_id: clienteId
 		});
+		return {
+            success: true,
+            message: "Solitação enviada!"
+        };
+	},
+	update:async(event)=>{
+		const formData= await event.request.formData()
+
+		const nome = formData.get('nome');
+		const descricao = formData.get('descricao');
+		const id = Number(formData.get('id'))
+		console.log(formData)
+
+		if (!nome || typeof nome !== 'string') {
+			return fail(400, { message: 'Digite um nome' });
+		}
+		if (!descricao || typeof descricao !== 'string') {
+			return fail(400, { message: 'Escolha uma descricao' });
+		}
+
+		await relatorioController.updateRelatorio(id,{nome:nome,descricao:descricao})
+
+		return {
+            successupdate: true,
+            message: "Relatorio alterado!"
+        };
 	}
 };

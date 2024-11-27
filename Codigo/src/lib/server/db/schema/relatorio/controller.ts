@@ -57,8 +57,8 @@ async function updateRelatorio(id: number, data: Partial<InsertRelatorio>) {
 	return db
 		.update(relatorioTable)
 		.set(data)
-		.where((relatorioTable.id as any).eq(id))
-		.run();
+		.where(eq(relatorioTable.id,id))
+		.returning()
 }
 
 // Deletar um relatório por ID

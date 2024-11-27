@@ -11,14 +11,23 @@ export const load = (async () => {
 
 export const actions: Actions = {
 	delete: async (event) => {
-		const formData = await event.request.formData();
-        const id = Number(formData.get('id'));
-		
         try {
+            const formData = await event.request.formData();
+            const id = Number(formData.get('id'));
             await contratoController.deleteContrato(id)
+
+            return {
+				success: true,
+				message: 'Contrato deletado com sucesso!'
+			}
             
         } catch (error:any) {
             console.error(error.message)
+            console.error(error)
+			return {
+				success: false,
+				message: 'Falha ao deletar'
+			}
         }
 
 

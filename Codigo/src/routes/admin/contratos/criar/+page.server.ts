@@ -43,12 +43,16 @@ export const actions: Actions = {
             },servicosIds);
             console.log('success')
 
+            redirect(302, '/admin/contratos');
             
         } catch (error:any) {
             console.error(error.message)
+            return {
+				success: false,
+				message: 'Falha ao criar'
+			}
         }
 
-        redirect(302, '/admin/contratos');
 
 	}
 };

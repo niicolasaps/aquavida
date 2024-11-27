@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import Alert from '$lib/components/Alert.svelte';
 	import type { PageData } from './$types';
 	import { format } from 'date-fns';
 
 	export let data: PageData;
+	export let form
 
 	let descricao = '';
 
@@ -65,6 +67,8 @@
 
 <div class="container mx-auto p-6">
 	<div class="grid gap-6 lg:grid-cols-2">
+
+	<Alert message={form?.message} success={form?.success}/>
 			<form method="POST" action="?/create" use:enhance={({formData})=>{
 				formData.set('descricao',descricao)
 				formData.set('cliente_id',clienteId)

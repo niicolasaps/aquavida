@@ -1,12 +1,14 @@
 <script lang="ts">
+	import Alert from '$lib/components/Alert.svelte';
     import type { PageData } from './$types';
 	import { format } from "date-fns";
     
     export let data: PageData;
+	export let form
 </script>
 <main class="container mx-auto">
 
-	
+	<Alert message={form?.message} success={form?.success}/>
 	<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
 		{#each data.contratos as template}
 		<div class="card bg-base-100 image-full md:max-w-96 w-full shadow-xl">

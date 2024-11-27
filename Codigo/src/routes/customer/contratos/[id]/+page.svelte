@@ -18,7 +18,12 @@
                         <p>Data de Expiração: {format(contrato.date_expire,'dd/MM/yyy')}</p>
                         <!-- <p>Representante: {contrato.representante?.name}</p> -->
                          <!-- <a href="/admin/contratos/{contrato.id}" class="btn btn-primary flex  mt-2 ">Ver contrato</a> -->
+                         <div class="flex gap-2 mt-4 items-center rounded">
+                              <a class="btn btn-sm btn-primary" href="/admin/acompanhamento/{contrato.id}" >Ver contrato</a>
+                            <a href="/customer/relatorio/criar/{contrato.id}" class="btn btn-sm btn-secondary">Novo relatorio</a>
+                        </div>
                     </li>
+
                 {/each}
             </div>
         </ul>

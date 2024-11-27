@@ -5,8 +5,8 @@
 
 	let relatorios = data.relatorios;
 </script>
-
-{JSON.stringify(relatorios?.contrato?.servico)}
+<!-- 
+{JSON.stringify(relatorios?.contrato?.servico)} -->
 
 <div class="min-h-screen bg-gray-100 p-6">
 	<div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6">
@@ -49,12 +49,14 @@
 				</div>
 			</form>
 
+			<hr class=my-10>
+
 			<div class="w-full">
 				{#if relatorios.contrato?.servico}
 					{#each relatorios.contrato?.servico as servico}
-						<div class="flex items-center justify-between border-b pb-2">
+						<div class="flex items-center justify-between border-b py-2 ">
 							<span class="text-sm font-medium">Serviço {servico.servico.name}</span>
-							<select
+							<!-- <select
 								bind:value={servico.status}
 								class="rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
 							>
@@ -63,24 +65,21 @@
 								<option value="nao_iniciado">Não iniciado</option>
 								<option value="pendente">Pendente</option>
 								<option value="recusado">Recusado</option>
-							</select>
+							</select> -->
+							<h1>{servico.status}</h1>
 						</div>
 					{/each}
 				{/if}
 			</div>
-			<div class="flex justify-end gap-4">
-				<button
-					type="submit"
-					class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
-				>
-					Emitir Relatório
-				</button>
-				<button
+			<div class="flex justify-end gap-4 mt-2">
+
+				<a
+				href="/admin/acompanhamento/{relatorios.contrato_id}"
 					type="button"
-					class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+					class="btn btn-primary"
 				>
 					Voltar
-				</button>
+				</a>
 			</div>
 		{/if}
 	</div>

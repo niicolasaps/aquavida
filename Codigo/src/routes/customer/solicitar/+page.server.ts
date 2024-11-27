@@ -25,7 +25,7 @@ export const actions: Actions = {
 
 		const cliente = await clienteController.getClienteByEmail(userEmail);
 		if (!cliente) {
-			return fail(404, { message: 'Cliente não encontrado.' });
+			return fail(404, { message: 'Cliente não encontrado, você precisa ser um cliente para realizar um pedido.' });
 		}
 
 		const clienteId = cliente.id;
@@ -40,11 +40,26 @@ export const actions: Actions = {
 			return fail(400, { message: 'Por favor, descreva sua necessidade.' });
 		}
 
-		await clienteController.insertPedido({
-			description: descricao as string,
-			status: 'pendente',
-			servico_id: servico_id,
-			cliente_id: clienteId
-		});
+		try {
+			await clienteController.insertPedido({
+				description: descricao as string,
+				status: 'pendente',
+				servico_id: servico_id,
+				cliente_id: clienteId
+			});
+	
+			return {
+				success: true,
+				message: 'Pedido solicitado com sucesso!'
+			}
+			
+		} catch (error:any) {
+			console.error(error)
+			return {
+				success: false,
+				message: 'Falha ao solicitar'
+			}
+		}
+
 	}
 };

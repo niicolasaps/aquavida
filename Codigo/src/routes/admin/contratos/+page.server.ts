@@ -23,7 +23,6 @@ export const actions: Actions = {
             
         } catch (error:any) {
             console.error(error.message)
-            console.error(error)
 			return {
 				success: false,
 				message: 'Falha ao deletar'

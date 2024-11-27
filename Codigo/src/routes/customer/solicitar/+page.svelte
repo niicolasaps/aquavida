@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 
 	import { getUserContext } from '$lib/stores/user';
+	import Alert from '$lib/components/Alert.svelte';
 
 	const user = getUserContext();
 
@@ -14,6 +15,7 @@
 <h1 class="text-center mt-4 text-2xl font-semibold">Solicitar serviços</h1>
 <form method="post" action="?/solicitar">
 	<div class="flex flex-col justify-center items-center max-w-xl mx-auto mt-5">
+		<Alert message={form?.message} success={form?.success}/>
 		<label class="form-control w-full">
 			<div class="label">
 				<span class="label-text">Selecione um serviço</span>
@@ -42,8 +44,5 @@
 
 		<button class="btn btn-primary mt-4 w-full" type="submit">Solicitar serviço</button>
 
-		{#if form?.message}
-			<p class="text-error text-center mt-4">{form.message}</p>
-		{/if}
 	</div>
 </form>

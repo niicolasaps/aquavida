@@ -22,6 +22,8 @@
 
 	let servicoId = 0;
 
+	let servicosIds:number[] = []
+
 	let dataVencimento = new Date();
 	let dataEmissao = new Date();
 
@@ -30,11 +32,16 @@
 	let templates = data.templates;
 
 	$:console.log(representanteId)
+	
 
 	function adicionar() {
 	const selectedTemplate = templates.find(
 		(template) => template.template.servico_id === servicoId
 	);
+	if(selectedTemplate?.servico){
+		servicosIds.push(selectedTemplate?.servico?.id)
+	}
+	console.log(servicosIds)
 	if (selectedTemplate) {
 		descricao += selectedTemplate.template.descricao + '<br><br>';
 		parts.length = 0;
@@ -63,6 +70,9 @@
 				formData.set('cliente_id',clienteId)
 				// formData.set('representante_id',String(representanteId))
 				formData.set('dataVencimento',String(dataVencimento))
+				servicosIds.forEach((id) => {
+					formData.append('servicosIds', String(id));
+				});
 			}}>
 				<div>
 					<div class=" w-full">

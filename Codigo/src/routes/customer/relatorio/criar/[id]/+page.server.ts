@@ -70,22 +70,47 @@ export const actions: Actions = {
         };
 	},
 	status:async (event)=>{
-		const formData = await event.request.formData()
-		const status = formData.get('status')
-		const contratoId= Number(formData.get('contratoID'))
+		try {
+			const formData = await event.request.formData()
+			const statusRaw = formData.get('status')
+			const contratoId= Number(formData.get('contratoID'))
+	
+			console.log(formData)
 
-		console.log(formData)
+			if (typeof statusRaw !== 'string') {
+				throw new Error('O status deve ser uma string válida.');
+			  }
 
-		// if (typeof status !== 'string' || !enumStatusServico.includes(status)) {
-		// 	throw new Error('Status inválido');
-		// }
+			  const status = statusRaw as string;
 
-		const test = await relatorioController.updateServicoToContrato(status as StatusType,contratoId)
-		console.log(test)
+			if (!enumStatusServico.includes(status as StatusType)) {
+				return {
+				  success: false,
+				  message: `Status inválido: ${status}. Os status válidos são: ${enumStatusServico.join(', ')}`,
+				};
+			  }
 
-		return {
-			succes:true,
-			message:'Sucesso ao atualizar status!'
+			const validStatus = status as StatusType;
+			console.log(contratoId)
+
+			const result = await relatorioController.updateServicoToContrato(
+				{ status: validStatus },
+				contratoId
+			  );
+			
+			  console.log(result);
+	
+			return {
+				success:true,
+				message:'Sucesso ao atualizar status!'
+			}
+			
+		} catch (error) {
+			console.error(error)
+			return {
+				success:false,
+				message:'Erro ao atualizar status!'
+			}
 		}
 	}
 };

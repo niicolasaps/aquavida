@@ -24,7 +24,8 @@ export const servicoRelations = relations(servicoTable, ({ many, one }) => ({
 
 export const enumStatusServico = ['Em Andamento', 'Concluido', 'Não Iniciado', 'Pendente', 'Recusado'] as const
 
-export type StatusType = "Em Andamento" | "Concluido" | "Não Iniciado" | "Pendente" | "Recusado";
+export type StatusType = typeof enumStatusServico[number]
+
 export const servicoToContratoTable = sqliteTable('servico_to_contrato', {
 	servico_id: integer('servico_id')
 		.notNull()
@@ -46,6 +47,11 @@ export const servicoToContratoRelations = relations(servicoToContratoTable, ({ o
 		references: [contratoTable.id]
 	})
 }));
+
+
+export type SelectServicoToContrato = typeof servicoToContratoTable.$inferSelect;
+export type InsertServicoToContrato = typeof servicoToContratoTable.$inferInsert;
+
 
 export const servicoToPedidoTable = sqliteTable('servico_to_pedido', {
 	servico_id: integer('servico_id')

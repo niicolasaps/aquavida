@@ -3,6 +3,7 @@
 
 	import { getUserContext } from '$lib/stores/user';
 	import { applyAction, enhance } from '$app/forms';
+	import Alert from '$lib/components/Alert.svelte';
 
 	const user = getUserContext();
 
@@ -21,14 +22,16 @@
 
 	const statuses = ['Em Andamento', 'Concluido', 'Não Iniciado', 'Pendente', 'Recusado'];
 </script>
-
 <div class="min-h-screen bg-gray-100 p-6">
-	<div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-6">
+	<div class="mb-2 mx-auto max-w-4xl">
+		<Alert message={form?.message} success={form?.success}/>
+	</div>
+	<div class="max-w-4xl mx-auto bg-base-100 rounded-lg shadow p-6">
 		{#if contrato}
 			<div class="space-y-6">
 				<div class="grid grid-cols-2 gap-6">
 					<div>
-						<label for="reportName" class="block text-sm font-medium text-gray-700">
+						<label for="reportName" class="block text-sm font-medium ">
 							Relatorio para o contrato:
 						</label>
 						<h1>{contrato.nome}</h1>
@@ -42,18 +45,20 @@
 								method="post"
 								use:enhance={({ formData }) => {
 									formData.set('status', String(servico.status));
-									formData.set('contratoId',String(contrato.id))
+									formData.set('contratoID',String(contrato.id))
 								}}
 							>
 								<div class="flex items-center justify-between border-b py-2">
 									<span class="text-sm font-medium">Serviço {servico.servico.name}</span>
-									<select name="" id="" bind:value={servico.status} >
-										<option value={servico.status}>{servico.status}</option>
-										{#each statuses as item}
-											<option value={item}>{item}</option>
-										{/each}
-									</select>
-									<button type="submit">salvar</button>
+									<div class="flex gap-2 items-center">
+										<select name="" id="" bind:value={servico.status} class="select" >
+											<option value={servico.status}>{servico.status}</option>
+											{#each statuses as item}
+												<option value={item}>{item}</option>
+											{/each}
+										</select>
+										<button type="submit" class="btn btn-primary btn-sm">salvar</button>
+									</div>
 								</div>
 							</form>
 						{/each}
@@ -111,7 +116,7 @@
 					}}
 				>
 					<div>
-						<label for="reportName" class="block text-sm font-medium text-gray-700">
+						<label for="reportName" class="block text-sm font-medium ">
 							Nome do relatório:
 						</label>
 						<!-- <h1>{relatorios.nome}</h1> -->
@@ -123,7 +128,7 @@
 						/>
 					</div>
 					<div>
-						<label for="reportDescription" class="block text-sm font-medium text-gray-700">
+						<label for="reportDescription" class="block text-sm font-medium mt-2">
 							Descrição do relatório
 						</label>
 						<textarea
@@ -139,9 +144,9 @@
 					{/if} -->
 					</div>
 				</form>
-				{#if form?.success}
+				<!-- {#if form?.success}
 					<p class="text-success text-center mt-4">{form.message}</p>
-				{/if}
+				{/if} -->
 			</div>
 
 			<hr class="my-5" />

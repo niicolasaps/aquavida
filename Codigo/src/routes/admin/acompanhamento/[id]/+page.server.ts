@@ -6,9 +6,13 @@ import type { PageServerLoad } from './$types';
 export const load = (async ({ params }) => {
     const id = Number(params.id);
     const pedidos = await clienteController.selectAllPedidos()
-    const contrato = await contratoController.selectContratoByIdClientRepresentante(id);
-    const contratoC = contrato[0]
-    return {contratoC, pedidos};
+    const contrato = await contratoController.selectContratoByIdClientRepresentante2(id);
+
+	if (!contrato) {
+		throw new Error(`Contrato não encontrado para o ID do cliente: ${id}`);
+	}
+	
+    return {contrato, pedidos};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

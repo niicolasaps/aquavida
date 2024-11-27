@@ -11,10 +11,8 @@ export const contratoTable = sqliteTable('contrato', {
 	date_expire: integer('date_expire',{mode:"timestamp"}).notNull(),
 	updated_at:integer('updated_at',{mode:"timestamp"}).default(sql`(CURRENT_TIMESTAMP)`),
 	cliente_id: integer('cliente_id').references(() => clienteTable.id),
-	// representante_id: integer('representante_id').references(() => representanteTable.id),
 	descricao: text('descricao'),
 	nome:text('nome'),
-	// servico_id: integer('servico_id').references(() => servicoTable.id)
 });
 
 export const contratoRelations = relations(contratoTable, ({ one, many }) => ({
@@ -23,10 +21,6 @@ export const contratoRelations = relations(contratoTable, ({ one, many }) => ({
 		references: [clienteTable.id]
 	}),
 	relatorio: many(relatorioTable),
-	// representate: one(representanteTable, {
-	// 	fields: [contratoTable.representante_id],
-	// 	references: [representanteTable.id]
-	// }),
 	servico: many(servicoToContratoTable),
 }));
 

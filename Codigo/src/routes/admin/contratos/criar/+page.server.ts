@@ -23,6 +23,7 @@ export const actions: Actions = {
 		// const representante_id = Number(formData.get('representanteId'));
         const cliente_id = Number(formData.get('cliente_id'));
         const descricao = formData.get('descricao') as string
+        const servicosIds = formData.getAll('servicosIds').map(Number);
 
 		if (!contratoNome || !dataVencimento ) {
             console.error('Campos obrigatorios')
@@ -39,8 +40,9 @@ export const actions: Actions = {
                 descricao: descricao,
                 nome: contratoNome,
                 // representante_id: representante_id
-            });
+            },servicosIds);
             console.log('success')
+
             
         } catch (error:any) {
             console.error(error.message)

@@ -9,30 +9,68 @@ export const load = (async () => {
 
 export const actions: Actions = {
 	create: async ({ request }) => {
-		const data = await request.formData();
-		const name = String(data.get('name'));
-		const cnpj = String(data.get('cnpj'));
-		const email = String(data.get('email'))
-		const endereco = String(data.get('endereco'))
-		const representante_id = Number(data.get('representante_id'));
+		try {
+			const data = await request.formData();
+			const name = String(data.get('name'));
+			const cnpj = String(data.get('cnpj'));
+			const email = String(data.get('email'))
+			const endereco = String(data.get('endereco'))
+			const representante_id = Number(data.get('representante_id'));
+	
+			await clienteController.insertCliente({ name, cnpj,email,endereco,representante_id });
 
-		await clienteController.insertCliente({ name, cnpj,email,endereco,representante_id });
+			return {
+				success: true,
+				message: 'Cliente criado com sucesso!'
+			}
+			
+		} catch (error) {
+			console.error(error)
+			return {
+				success: false,
+				message: 'Falha ao criar'
+			}
+		}
 	},
 	delete: async ({ request }) => {
-		const data = await request.formData();
-		const id = Number(data.get('id'));
-
-		await clienteController.deleteCliente(id);
+		try {
+			const data = await request.formData();
+			const id = Number(data.get('id'));
+	
+			await clienteController.deleteCliente(id);
+			return {
+				success: true,
+				message: 'Cliente deletado com sucesso!'
+			}
+		} catch (error) {
+			console.error(error)
+			return {
+				success: false,
+				message: 'Falha ao deletar'
+			}
+		}
 	},
 	update: async ({ request }) => {
-		const data = await request.formData();
-		const id = Number(data.get('id'));
-		const name = String(data.get('name'));
-		const cnpj = String(data.get('cnpj'));
-		const email = String(data.get('email'))
-		const endereco = String(data.get('endereco'))
-		const representante_id = Number(data.get('representante_id'));
-
-		await clienteController.updateCliente(id, { name, cnpj, email, endereco, representante_id });
+		try {
+			const data = await request.formData();
+			const id = Number(data.get('id'));
+			const name = String(data.get('name'));
+			const cnpj = String(data.get('cnpj'));
+			const email = String(data.get('email'))
+			const endereco = String(data.get('endereco'))
+			const representante_id = Number(data.get('representante_id'));
+	
+			await clienteController.updateCliente(id, { name, cnpj, email, endereco, representante_id });
+			return {
+				success: true,
+				message: 'Cliente atualizado com sucesso!'
+			}
+		} catch (error) {
+			console.error(error)
+			return {
+				success: false,
+				message: 'Falha ao atualizar'
+			}
+		}
 	}
 };

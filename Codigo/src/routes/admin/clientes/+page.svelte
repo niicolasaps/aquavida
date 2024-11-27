@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import Alert from '$lib/components/Alert.svelte';
 	// import ClienteModal from '$lib/components/modal/ClienteModal.svelte';
 	import type { SelectCliente } from '$lib/server/db/schema';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+	export let form
 
 	let clientes = data.clientes;
 	let isOpenModal: HTMLDialogElement | null = null;
@@ -68,6 +70,7 @@
 				> para criar um cliente
 			</h1>
 		{:else}
+		<Alert message={form?.message} success={form?.success}/>
 			<div class="fle x flex-col mt-6">
 				<div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
 					<div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">

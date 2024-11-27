@@ -3,13 +3,13 @@ import { relatorioTable } from '$lib/server/db/schema/relatorio';
 import type { InsertRelatorio } from '$lib/server/db/schema/relatorio';
 import { eq } from 'drizzle-orm';
 import { contratoTable } from '../contrato';
-import { servicoTable, servicoToContratoRelations, servicoToContratoTable } from '../servico';
+import { enumStatusServico, servicoTable, servicoToContratoRelations, servicoToContratoTable, type StatusType } from '../servico';
 import { representanteTable } from '../representante';
 import { clienteTable } from '../cliente';
 
 // Inserir um relatório
 async function insertRelatorio(data: InsertRelatorio) {
-	return db.insert(relatorioTable).values(data);
+	return db.insert(relatorioTable).values(data).returning()
 }
 
 // Selecionar um relatório por ID
@@ -35,8 +35,13 @@ async function selectRelatorioById(id: number) {
         },
     })
 }
+
 async function servicoToContrato(){
     return db.select().from(servicoToContratoTable)
+}
+
+async function updateServicoToContrato(status: StatusType,contratoId:number){
+	return db.update(servicoToContratoTable).set({status:status}).where(eq(servicoToContratoTable.contrato_id,contratoId)).returning()
 }
 
 // Selecionar todos os relatórios
@@ -76,5 +81,6 @@ export const relatorioController = {
 	updateRelatorio,
 	deleteRelatorio,
 	selectRelatorioByContrato,
-    servicoToContrato
+    servicoToContrato,
+	updateServicoToContrato
 };

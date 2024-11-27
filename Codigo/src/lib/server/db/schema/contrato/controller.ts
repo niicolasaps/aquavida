@@ -19,8 +19,18 @@ async function insertContrato(data: InsertContrato, servicoIds: number[]) {
 }
 
 async function selectContratoById(id: number) {
-	return db.select().from(contratoTable).where(eq(contratoTable.id, id));
+	return db.query.contratoTable.findFirst({
+        where: eq(contratoTable.id,id),
+        with:{
+            servico: {
+				with: {
+					servico:true
+				}
+			}
+        },
+    })
 }
+
 
 async function selectContratoByIdClientRepresentante(id: number) {
 	return db

@@ -45,7 +45,7 @@ async function selectClientesByRepresentante(id:string) {
         throw new Error('Nenhum representante');
     }
 
-    const clientes = await selectClientesByRepresentanteId(representante[0].id);
+    const clientes = await selectClientesByRepresentanteId(representante[0].id)
     return clientes;
 }
 

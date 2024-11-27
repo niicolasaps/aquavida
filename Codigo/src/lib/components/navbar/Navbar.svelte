@@ -113,7 +113,6 @@
 							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 						>
 							<li><a href="/representantes/clientes">Seus clientes</a></li>
-							<li><a href="/representantes/solicitarServico">Recomendar serviço</a></li>
 						</ul>
 					</div>
 				{/if}

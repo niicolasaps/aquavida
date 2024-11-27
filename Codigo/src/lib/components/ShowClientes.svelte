@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { SelectCliente } from "$lib/server/db/schema";
+
 export let clientes
 </script>
 
@@ -59,6 +61,7 @@ export let clientes
 												class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-opacity-50"
 												>Endereço</th
 											>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody class="bg-base-200 bg-opacity-20 divide-y divide-base-300">
@@ -88,6 +91,10 @@ export let clientes
 												>
 												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
 													>{cliente.endereco}</td
+												>
+												<td class="px-4 py-4 text-sm text-opacity-50 whitespace-nowrap"
+													>
+													<a href="/customer/contratos/{cliente.id}">Ver contratos</a></td
 												>
 											</tr>
 										{/each}

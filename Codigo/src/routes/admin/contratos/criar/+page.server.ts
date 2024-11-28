@@ -32,7 +32,7 @@ export const actions: Actions = {
 			});
 		}
 
-        try {
+        // try {
             await contratoController.insertContrato({
                 date_expire: new Date(dataVencimento),
                 cliente_id: cliente_id,
@@ -42,16 +42,20 @@ export const actions: Actions = {
                 // representante_id: representante_id
             },servicosIds);
             console.log('success')
-
+			
+			return {
+				success: true,
+				message: 'Sucesso ao criar!'
+			}
             redirect(302, '/admin/contratos');
             
-        } catch (error:any) {
-            console.error(error.message)
-            return {
-				success: false,
-				message: 'Falha ao criar'
-			}
-        }
+        // } catch (error:any) {
+        //     console.error(error.message)
+        //     return {
+		// 		success: false,
+		// 		message: 'Falha ao criar'
+		// 	}
+        // }
 
 
 	}

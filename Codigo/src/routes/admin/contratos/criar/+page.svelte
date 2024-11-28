@@ -66,9 +66,9 @@
 </script>
 
 <div class="container mx-auto p-6">
+	<Alert message={form?.message} success={form?.success}/>
 	<div class="grid gap-6 lg:grid-cols-2">
 
-	<Alert message={form?.message} success={form?.success}/>
 			<form method="POST" action="?/create" use:enhance={({formData})=>{
 				formData.set('descricao',descricao)
 				formData.set('cliente_id',clienteId)

@@ -107,7 +107,7 @@
 
 					<div class="w-full mt-4">
 						<label class="input input-bordered flex items-center gap-2">
-							<input type="password" class="grow" name="password" />
+							<input type="password" class="grow" placeholder="Password" name="password" />
 						</label>
 					</div>
 

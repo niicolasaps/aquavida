@@ -81,7 +81,9 @@
 				</div>
 			</div>
 
+			{#if data.fullUser.tipo ==='gerente'}
 			<a class="btn btn-primary w-full" href="/admin/contratos/{contrato.id}">Editar Contrato</a>
+			{/if}
 		</div>
 
 		<div class="p-6 bg-base-200 rounded-lg">
@@ -127,27 +129,28 @@
 		>
     {#if selectedPedido.status === 'pendente'}
     <div class="flex gap-3 w-full justify-end">
-
-      <form method="POST" action="?/aceitarPedido" use:enhance={()=>{
-        setTimeout(()=>{
-          window.location.reload()
-        },2000)
-        }}>
-        <div class="flex flex-col gap-3 mt-3 w-full">
-          <input type="hidden" name="pedidoId" value={selectedPedido.id} />
-          <button class="btn btn-success" type="submit">Aceitar pedido</button>
-        </div>
-      </form>
-      <form method="POST" action="?/recusarPedido" use:enhance={()=>{
-        setTimeout(()=>{
-          window.location.reload()
-        },2000)
-        }}>
-        <div class="flex flex-col gap-3 mt-3 w-full">
-          <input type="hidden" name="pedidoId" value={selectedPedido.id} />
-          <button class="btn btn-error" type="submit">Recusar pedido</button>
-        </div>
-      </form>
+{#if data.fullUser.tipo ==='gerente'}
+<form method="POST" action="?/aceitarPedido" use:enhance={()=>{
+  setTimeout(()=>{
+	window.location.reload()
+  },2000)
+  }}>
+  <div class="flex flex-col gap-3 mt-3 w-full">
+	<input type="hidden" name="pedidoId" value={selectedPedido.id} />
+	<button class="btn btn-success" type="submit">Aceitar pedido</button>
+  </div>
+</form>
+<form method="POST" action="?/recusarPedido" use:enhance={()=>{
+  setTimeout(()=>{
+	window.location.reload()
+  },2000)
+  }}>
+  <div class="flex flex-col gap-3 mt-3 w-full">
+	<input type="hidden" name="pedidoId" value={selectedPedido.id} />
+	<button class="btn btn-error" type="submit">Recusar pedido</button>
+  </div>
+</form>
+{/if}
     </div>
     {/if}
 	</div>

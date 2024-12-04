@@ -1,5 +1,5 @@
 
-import { clienteController, contratoController } from '$lib/server/db/controllers';
+import { clienteController, contratoController, userController } from '$lib/server/db/controllers';
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -16,8 +16,11 @@ export const load = (async ({ params,locals }) => {
 	if (!user || !session) {
 		return redirect(302, '/login');
 	}
+
+
+    const [fullUser] = await userController.getUserByEmail(user.email);
 	
-    return {contrato, pedidos};
+    return {contrato, pedidos,fullUser};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

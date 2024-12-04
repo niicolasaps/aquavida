@@ -6,9 +6,9 @@ import type { Actions, PageServerLoad } from './$types';
 export const load = (async ({ locals }) => {
 	const { user, session } = locals;
 
-	if (!user || !session) {
-		return redirect(302, '/login');
-	}
+	// if (!user || !session) {
+	// 	return redirect(302, '/login');
+	// }
 
 	return { session, user };
 }) satisfies PageServerLoad;

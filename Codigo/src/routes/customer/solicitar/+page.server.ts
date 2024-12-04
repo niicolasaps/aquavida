@@ -1,10 +1,14 @@
 import { clienteController, servicoController } from '$lib/server/db/controllers';
 import type { Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { lucia } from '$lib/server/auth';
 
-export const load = (async () => {
+export const load = (async ({locals}) => {
+	const { user, session } = locals;
+	if (!user || !session) {
+		return redirect(302, '/login');
+	}
 	const servicos = await servicoController.selectAllServicos();
 	return { servicos };
 }) satisfies PageServerLoad;

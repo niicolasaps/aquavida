@@ -1,7 +1,12 @@
 import { clienteController } from '$lib/server/db/controllers';
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
-export const load = (async () => {
+export const load = (async ({locals}) => {
+	const { user, session } = locals;
+	if (!user || !session) {
+		return redirect(302, '/login');
+	}
 	const pedidos = await clienteController.selectAllPedidos();
 	return { pedidos };
 }) satisfies PageServerLoad;

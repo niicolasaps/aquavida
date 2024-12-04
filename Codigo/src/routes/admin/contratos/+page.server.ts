@@ -1,8 +1,12 @@
 import { contratoController } from '$lib/server/db/controllers';
-import type { Actions } from '@sveltejs/kit';
+import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load = (async () => {
+export const load = (async ({locals}) => {
+ const { user, session } = locals;
+    if (!user || !session) {
+        return redirect(302, '/login');
+    }
 
     const contratos = await contratoController.selectAllContratosWithRepresentante()
 

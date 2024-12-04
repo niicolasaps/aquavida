@@ -1,10 +1,93 @@
+import { fontFamily } from "tailwindcss/defaultTheme";
+import tailwindcssAnimate from "tailwindcss-animate";
+
 /** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+const config = {
+	darkMode: ["class"],
+	content: ["./src/**/*.{html,js,svelte,ts}"],
+	safelist: ["dark"],
 	theme: {
-		extend: {}
+		container: {
+			center: true,
+			padding: "2rem",
+			screens: {
+				"2xl": "1400px"
+			}
+		},
+		extend: {
+			colors: {
+				border: 'oklch(var(--p) / <alpha-value>)',
+				input: 'oklch(var(--s) / <alpha-value>)',
+				ring: 'oklch(var(--in) / <alpha-value>)',
+				background: 'oklch(var(--b1) / <alpha-value>)',
+				foreground: 'oklch(var(--bc) / <alpha-value>)',
+				primary: {
+					DEFAULT: 'oklch(var(--p) / <alpha-value>)',
+					foreground: 'oklch(var(--pc) / <alpha-value>)'
+				},
+				secondary: {
+					DEFAULT: 'oklch(var(--s) / <alpha-value>)',
+					foreground: 'oklch(var(--sc) / <alpha-value>)'
+				},
+				destructive: {
+					DEFAULT: 'oklch(var(--er) / <alpha-value>)',
+					foreground: 'oklch(var(--erc) / <alpha-value>)'
+				},
+				muted: {
+					DEFAULT: 'oklch(var(--n) / <alpha-value>)',
+					foreground: 'oklch(var(--nc) / <alpha-value>)'
+				},
+				accent: {
+					DEFAULT: 'oklch(var(--a) / <alpha-value>)',
+					foreground: 'oklch(var(--ac) / <alpha-value>)'
+				},
+				popover: {
+					DEFAULT: 'oklch(var(--b2) / <alpha-value>)',
+					foreground: 'oklch(var(--bc) / <alpha-value>)'
+				},
+				card: {
+					DEFAULT: 'oklch(var(--n) / <alpha-value>)',
+					foreground: 'oklch(var(--nc) / <alpha-value>)'
+				},
+				sidebar: {
+					DEFAULT: 'oklch(var(--b2) / <alpha-value>)',
+					foreground: 'oklch(var(--bc) / <alpha-value>)',
+					primary: 'oklch(var(--p) / <alpha-value>)',
+					'primary-foreground': 'oklch(var(--pc) / <alpha-value>)',
+					accent: 'oklch(var(--p) / <alpha-value>)',
+					'accent-foreground': 'oklch(var(--pc) / <alpha-value>)',
+					border: 'oklch(var(--bc) / <alpha-value>)',
+					ring: 'oklch(var(--bc) / <alpha-value>)'
+				}
+			},
+			borderRadius: {
+				xl: 'calc(var(--rounded-btn) + 4px)',
+				lg: 'var(--rounded-btn)',
+				md: 'calc(var(--rounded-btn) - 2px)',
+				sm: 'calc(var(--rounded-btn) - 4px)'
+			},
+			keyframes: {
+				'accordion-down': {
+					from: { height: '0' },
+					to: { height: 'var(--bits-accordion-content-height)' }
+				},
+				'accordion-up': {
+					from: { height: 'var(--bits-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'caret-blink': {
+					'0%,70%,100%': { opacity: '1' },
+					'20%,50%': { opacity: '0' }
+				}
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'caret-blink': 'caret-blink 1.25s ease-out infinite'
+			}
+		}
 	},
-  daisyui: {
+	daisyui: {
     themes: [
       "light",
       "dark",
@@ -47,6 +130,7 @@ export default {
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
     themeRoot: ":root", // The element that receives theme color CSS variables
   },
-	plugins: [require('daisyui'),require("@tailwindcss/typography")]
-  
+	plugins: [require('daisyui'),require("@tailwindcss/typography"),tailwindcssAnimate],
 };
+
+export default config;

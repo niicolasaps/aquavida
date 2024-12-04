@@ -21,6 +21,6 @@
 </script>
 
 <div>
-	<Navbar fullUser={data.fullUser} />
+	<Navbar fullUser={data.fullUser} servicos={data.servicos}/>
 	<slot />
 </div>

@@ -2,10 +2,13 @@
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import { getUserContext } from '$lib/stores/user';
 	import { enhance } from '$app/forms';
-	import type { SelectUser } from '$lib/server/db/schema';
+	import type { SelectServico, SelectUser } from '$lib/server/db/schema';
 
 	const user = getUserContext();
-	export let fullUser:SelectUser
+	export let fullUser: SelectUser;
+	export let servicos: SelectServico[];
+
+	let isOpenModal: HTMLDialogElement | null = null;
 </script>
 
 <nav class="bg-base-200">
@@ -81,51 +84,80 @@
 				</li>
 				{#if $user}
 					<li>
-						<a href="/customer/servicos" class="btn m-1">Todos servicos</a>
+						<button on:click={() => isOpenModal?.showModal()} class="btn m-1">Todos servicos</button
+						>
 					</li>
-				
+
 					{#if fullUser.tipo === 'gerente'}
-					<div class="dropdown">
-						<div tabindex="0" role="button" class="btn m-1">Admin</div>
-						<ul
-							tabindex="0"
-							class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
-						>
-							<li><a href="/admin/clientes">Clientes</a></li>
-							<li><a href="/admin/representantes">Representantes</a></li>
-							<li><a href="/admin/servicos">Serviços</a></li>
-							<li><a href="/admin/pedidos">Pedidos</a></li>
-							<li><a href="/admin/template">Criar templates</a></li>
-							<li><a href="/admin/contratos">Contratos</a></li>
-						</ul>
-					</div>
+						<div class="dropdown">
+							<div tabindex="0" role="button" class="btn m-1">Admin</div>
+							<ul
+								tabindex="0"
+								class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
+							>
+								<li><a href="/admin/clientes">Clientes</a></li>
+								<li><a href="/admin/representantes">Representantes</a></li>
+								<li><a href="/admin/servicos">Serviços</a></li>
+								<li><a href="/admin/pedidos">Pedidos</a></li>
+								<li><a href="/admin/template">Criar templates</a></li>
+								<li><a href="/admin/contratos">Contratos</a></li>
+							</ul>
+						</div>
 					{/if}
-					
+
 					{#if fullUser.tipo === 'cliente'}
-					<div class="dropdown">
-						<div tabindex="0" role="button" class="btn m-1">Cliente</div>
-						<ul
-							tabindex="0"
-							class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
-						>
-							<li><a href="/customer/solicitar">Solicitar serviço</a></li>
-							<li><a href="/customer/contratos/1">Visualizar contratos</a></li>
-						</ul>
-					</div>
+						<div class="dropdown">
+							<div tabindex="0" role="button" class="btn m-1">Cliente</div>
+							<ul
+								tabindex="0"
+								class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
+							>
+								<li><a href="/customer/solicitar">Solicitar serviço</a></li>
+								<li><a href="/customer/contratos/1">Visualizar contratos</a></li>
+							</ul>
+						</div>
 					{/if}
 					{#if fullUser.tipo === 'representante'}
-					<div class="dropdown">
-						<div tabindex="0" role="button" class="btn m-1">Representante</div>
-						<ul
-							tabindex="0"
-							class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
-						>
-							<li><a href="/representantes/clientes">Seus clientes</a></li>
-						</ul>
-					</div>
+						<div class="dropdown">
+							<div tabindex="0" role="button" class="btn m-1">Representante</div>
+							<ul
+								tabindex="0"
+								class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
+							>
+								<li><a href="/representantes/clientes">Seus clientes</a></li>
+							</ul>
+						</div>
 					{/if}
 				{/if}
 			</ul>
 		</div>
 	</div>
 </nav>
+
+<dialog id="my_modal_2" class="modal" bind:this={isOpenModal}>
+	<div class="modal-box overflow-auto">
+		<h1 class="mb-3 text-3xl font-semibold text-center">Nossos serviços</h1>
+		{#if servicos.length > 0}
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+				{#each servicos as servico (servico.id)}
+					<div class="bg-base-200 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+						<h2 class="text-2xl font-semibold mb-2">{servico.name}</h2>
+						<p class="">{servico.description}</p>
+					</div>
+				{/each}
+			</div>
+		{:else}
+			<h1 class="text-center text-lg">Nenhum serviço ainda!</h1>
+		{/if}
+	</div>
+	<form method="dialog" class="modal-backdrop">
+		<button>close</button>
+	</form>
+</dialog>
+
+<style>
+	.modal-box {
+		width: 100% !important;
+		max-width: 200vh !important;
+	}
+</style>

@@ -17,9 +17,10 @@
 	const user = createUserContext(data.user);
 	$: user.set(data.user);
 
+
 </script>
 
 <div>
-	<Navbar />
+	<Navbar fullUser={data.fullUser} />
 	<slot />
 </div>

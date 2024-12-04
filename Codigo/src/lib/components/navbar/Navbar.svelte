@@ -1,9 +1,11 @@
-<script>
+<script lang="ts">
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import { getUserContext } from '$lib/stores/user';
 	import { enhance } from '$app/forms';
+	import type { SelectUser } from '$lib/server/db/schema';
 
 	const user = getUserContext();
+	export let fullUser:SelectUser
 </script>
 
 <nav class="bg-base-200">
@@ -81,11 +83,13 @@
 					<li>
 						<a href="/customer/servicos" class="btn m-1">Todos servicos</a>
 					</li>
+				
+					{#if fullUser.tipo === 'gerente'}
 					<div class="dropdown">
 						<div tabindex="0" role="button" class="btn m-1">Admin</div>
 						<ul
 							tabindex="0"
-							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+							class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
 						>
 							<li><a href="/admin/clientes">Clientes</a></li>
 							<li><a href="/admin/representantes">Representantes</a></li>
@@ -95,25 +99,31 @@
 							<li><a href="/admin/contratos">Contratos</a></li>
 						</ul>
 					</div>
+					{/if}
+					
+					{#if fullUser.tipo === 'cliente'}
 					<div class="dropdown">
 						<div tabindex="0" role="button" class="btn m-1">Cliente</div>
 						<ul
 							tabindex="0"
-							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+							class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
 						>
 							<li><a href="/customer/solicitar">Solicitar serviço</a></li>
 							<li><a href="/customer/contratos/1">Visualizar contratos</a></li>
 						</ul>
 					</div>
+					{/if}
+					{#if fullUser.tipo === 'representante'}
 					<div class="dropdown">
 						<div tabindex="0" role="button" class="btn m-1">Representante</div>
 						<ul
 							tabindex="0"
-							class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+							class="dropdown-content menu bg-base-100 rounded-box z-[90] w-52 p-2 shadow"
 						>
 							<li><a href="/representantes/clientes">Seus clientes</a></li>
 						</ul>
 					</div>
+					{/if}
 				{/if}
 			</ul>
 		</div>

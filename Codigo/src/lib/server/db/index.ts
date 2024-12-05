@@ -1,5 +1,5 @@
 import { drizzle } from 'drizzle-orm/libsql/web';
-import { createClient } from '@libsql/client';
+import { createClient } from '@libsql/client/web';
 //import { dev } from '$app/environment';
 import * as schema from './schema';
 

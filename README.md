@@ -18,4 +18,9 @@ Este projeto visa desenvolver uma alternativa para os envolvidos de um serviços
 
 ## Instruções de utilização
 
-[Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação].
+Os usuários do sistema podem acessá-lo diretamente pela url: 
+
+Inicialmente o gerente deve ser cadastrado diretamente no banco de dados. O gerente pode então realizar o pré-cadastro de seus representantes, o que liberará para esses representantes efetivarem seu cadastro. Os clientes podem solicitar serem cadastrado no sistema pelo gerente, ou realizarem o cadastro próprio.
+Gerentes podem então realizar o cadastro de serviços que forem prestados, e criar um template que será utilizado na criação de contratos quando forem incluídos esses serviços.
+Clientes podem solicitar serviços que desejam, e dessa forma abrirem um contrato.
+Representante podem realizar emissão de relatórios de acompanhamento, tendo controle dos status dos serviços sendo prestado e podendo solicitar novos serviços se necessários.

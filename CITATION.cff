@@ -2,30 +2,30 @@ cff-version: 1.0.1
 message: Please cite this software using these metadata.
 title: 
 authors:
-  - family-names: Sobrenome do aluno 1
-    given-names: Nome do aluno 1
-  - family-names: Sobrenome do aluno 2
-    given-names: Nome do aluno 2
-  - family-names: Sobrenome do aluno 3
-    given-names: Nome do aluno 3
-  - family-names: Sobrenome do aluno 4
-    given-names: Nome do aluno 4
-  - family-names: Sobrenome do aluno 5
-    given-names: Nome do aluno 5
-  - family-names: Sobrenome do aluno 6
-    given-names: Nome do aluno 6
+  - family-names: George Souza Cardenas
+    given-names: Arthur
+  - family-names: de Oliveira Brandão
+    given-names: Breno
+  - family-names: Vieira Machado
+    given-names: Leonardo
+  - family-names: Almeida Prado da Silva
+    given-names: Nicolas
+  - family-names: Assunção de Sousa
+    given-names: Tiago
+  - family-names: Araujo Resende
+    given-names: Yan
   - name-suffix: Professor
     affiliation: PUC Minas
     family-names: Alonso Veloso
     given-names: Eveline
   - name-suffix: Professor
     affiliation: PUC Minas
-    family-names: 
-    given-names: 
+    family-names: Amaral Baroni de Carvalho
+    given-names: Juliana
 keywords:
-  - 
-  - 
+  - Gerenciamento
+  - Tratamento de água
 repository-code: 
 license: CC-BY-4.0
 version: 1.0.0
-date-released:
+date-released: 2024/12/11

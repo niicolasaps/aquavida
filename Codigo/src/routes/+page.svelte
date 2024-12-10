@@ -26,7 +26,7 @@
         </div>
       </section>
       
-    <section id="caracteristicas" class="w-full py-12 md:py-24 lg:py-32 bg-base-200">
+    <!-- <section id="caracteristicas" class="w-full py-12 md:py-24 lg:py-32 bg-base-200">
       <div class="container px-4 md:px-6">
         <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">Principais Características</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -76,7 +76,7 @@
           </Card>
         </div>
       </div>
-    </section>
+    </section> -->
     
     <!-- <section id="depoimentos" class="w-full py-12 md:py-24 lg:py-32">
       <div class="container px-4 md:px-6">

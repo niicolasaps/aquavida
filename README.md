@@ -18,7 +18,7 @@ Este projeto visa desenvolver uma alternativa para os envolvidos de um serviços
 
 ## Instruções de utilização
 
-Os usuários do sistema podem acessá-lo diretamente pela url: 
+Os usuários do sistema podem acessá-lo diretamente pela url: https://aqua-vida-deployment.vercel.app/
 
 Inicialmente o gerente deve ser cadastrado diretamente no banco de dados. O gerente pode então realizar o pré-cadastro de seus representantes, o que liberará para esses representantes efetivarem seu cadastro. Os clientes podem solicitar serem cadastrado no sistema pelo gerente, ou realizarem o cadastro próprio.
 Gerentes podem então realizar o cadastro de serviços que forem prestados, e criar um template que será utilizado na criação de contratos quando forem incluídos esses serviços.
